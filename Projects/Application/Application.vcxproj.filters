@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{0259E1F6-6EC3-956D-B701-471323AB73C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\IMGUI">
+      <UniqueIdentifier>{4C77ABE7-B802-19AC-C113-9CA02D1E75AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\IMGUI\imgui">
+      <UniqueIdentifier>{B6CDBE5D-223A-7A58-EB2D-12B657599CC0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\IMGUI\imgui-sfml">
+      <UniqueIdentifier>{15EE0082-01FE-AC52-6AB7-117156E69BEB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DebugGUI">
+      <UniqueIdentifier>{96d7f856-f0de-4281-8558-6bd33c756a24}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Display.hpp" />
+    <ClInclude Include="LuaConsole.hpp">
+      <Filter>DebugGUI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp">
+      <Filter>Libraries\IMGUI\imgui-sfml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui.cpp">
+      <Filter>Libraries\IMGUI\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_demo.cpp">
+      <Filter>Libraries\IMGUI\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_draw.cpp">
+      <Filter>Libraries\IMGUI\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_widgets.cpp">
+      <Filter>Libraries\IMGUI\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+</Project>
