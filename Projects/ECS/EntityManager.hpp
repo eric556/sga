@@ -72,6 +72,58 @@ namespace ECS {
 			return retEntities;
 		}
 
+		template<class T>
+		std::vector<std::shared_ptr<Entity>> getEntitiesByComponent(unsigned int flags[], int numFlags) {
+			std::vector<std::shared_ptr<Entity>> retEntities;
+
+			for (auto entity : entities) {
+				if (entity->hasComponents<T>(flags, numFlags)) {
+					retEntities.push_back(entity);
+				}
+			}
+
+			return retEntities;
+		}
+
+		template<class T, class... Other>
+		std::vector<std::shared_ptr<Entity>> getEntitiesByComponents(unsigned int flags[], int numFlags) {
+			std::vector<std::shared_ptr<Entity>> retEntities;
+
+			for (auto entity : entities) {
+				if (entity->hasComponents<T, Other...>(flags, numFlags)) {
+					retEntities.push_back(entity);
+				}
+			}
+
+			return retEntities;
+		}
+
+		template<class T>
+		std::vector<std::shared_ptr<Entity>> getEntitiesByComponent(unsigned int flag) {
+			std::vector<std::shared_ptr<Entity>> retEntities;
+
+			for (auto entity : entities) {
+				if (entity->hasComponents<T>(flag)) {
+					retEntities.push_back(entity);
+				}
+			}
+
+			return retEntities;
+		}
+
+		template<class T, class... Other>
+		std::vector<std::shared_ptr<Entity>> getEntitiesByComponents(unsigned int flag) {
+			std::vector<std::shared_ptr<Entity>> retEntities;
+
+			for (auto entity : entities) {
+				if (entity->hasComponents<T, Other...>(flag)) {
+					retEntities.push_back(entity);
+				}
+			}
+
+			return retEntities;
+		}
+
 #ifdef IMGUI_SFML
 		void Debug() {
 			if (!ImGui::CollapsingHeader("Entities"))

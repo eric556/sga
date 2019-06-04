@@ -9,7 +9,7 @@ namespace Systems {
 
 	static void GravitySystem() {
 		ECS::EntityManager eManager;
-		auto physicsEntities = eManager.getEntitiesByComponent<Physics>();
+		auto physicsEntities = eManager.getEntitiesByComponent<Physics>(CompConsts::GRAVITY);
 
 		for (auto entity : physicsEntities) {
 			auto physics = entity->getComponent<Physics>();

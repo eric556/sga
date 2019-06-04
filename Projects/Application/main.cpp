@@ -52,16 +52,23 @@ int main()
 	MenuBar menuBar;
 	menuBar.init(&lua);
 
-	for (int i = 0; i < 100; i++) {
-		std::shared_ptr<ECS::Entity> entity = eManager.createEntity();
-		std::shared_ptr<Display> display = entity->addComponent<Display>();
-		display->shape.setSize(sf::Vector2f(10, 10));
-		display->shape.setFillColor(sf::Color::Red);
+	// for (int i = 0; i < 100; i++) {
+	// 	std::shared_ptr<ECS::Entity> entity = eManager.createEntity();
+	// 	std::shared_ptr<Display> display = entity->addComponent<Display>();
+	// 	display->shape.setSize(sf::Vector2f(10, 10));
+	// 	display->shape.setFillColor(sf::Color::Red);
+	// 
+	// 	std::shared_ptr<Physics> physics = entity->addComponent<Physics>();
+	// 	physics->position = sf::Vector2f(random(0, 1280), random(0, 720));
+	// 	physics->mass = random(1, 100);
+	// 
+	// 	entity->addComponent(CompConsts::GRAVITY);
+	// }
 
-		std::shared_ptr<Physics> physics = entity->addComponent<Physics>();
-		physics->position = sf::Vector2f(random(0, 1280), random(0, 720));
-		physics->mass = random(1, 100);
-	}
+	std::shared_ptr<ECS::Entity> player = eManager.createEntity();
+	std::shared_ptr<Physics> playerPhysics = player->addComponent<Physics>();
+	std::shared_ptr<Display> playerDisplay = player->addComponent<Display>();
+	player->addComponent(CompConsts::INPUT);
 
 	window.resetGLStates();
 	sf::Clock deltaClock;
@@ -76,6 +83,8 @@ int main()
 		}
 
 		sf::Time dt = deltaClock.restart();
+
+		Systems::PlayerInputSystem();
 
 		Systems::GravitySystem();
 		Systems::PhysicsSystem(dt.asSeconds());

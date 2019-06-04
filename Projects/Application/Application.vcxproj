@@ -101,6 +101,7 @@
     <ClInclude Include="MenuBar.hpp" />
     <ClInclude Include="Physics.hpp" />
     <ClInclude Include="PhysicsSystem.hpp" />
+    <ClInclude Include="PlayerInputSystem.hpp" />
     <ClInclude Include="RenderSystem.hpp" />
     <ClInclude Include="Systems.h" />
   </ItemGroup>

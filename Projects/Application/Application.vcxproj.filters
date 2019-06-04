@@ -52,6 +52,9 @@
     <ClInclude Include="GravitySystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerInputSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp">

@@ -4,6 +4,8 @@ namespace CompConsts{
 	enum ComponentType {
 		BASE = 0,
 		DISPLAY,
-		PHYSICS
+		PHYSICS,
+		GRAVITY,
+		INPUT
 	};
 }
