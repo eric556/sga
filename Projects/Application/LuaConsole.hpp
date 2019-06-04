@@ -10,9 +10,13 @@
 
 class LuaConsole {
 public:
-	LuaConsole(sol::state* luaState) : lua(luaState) {
+	LuaConsole() : lua(nullptr) {
 		textBuffer[0] = 0;
 		visible = false;
+	}
+
+	void init(sol::state* luaState) {
+		lua = luaState;
 	}
 
 	~LuaConsole() {}
@@ -53,17 +57,23 @@ public:
 
 
 		if (ImGui::InputTextMultiline("", textBuffer, 255, ImVec2(-1.0f, ImGui::GetTextLineHeight() + 15), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine | ImGuiInputTextFlags_AllowTabInput)) {
-			auto result = lua->safe_script(textBuffer, sol::script_pass_on_error);
+			if (lua != nullptr) {
+				auto result = lua->safe_script(textBuffer, sol::script_pass_on_error);
 
-			if (!result.valid()) {
-				sol::error err = result;
-				entries.push_back(std::string(textBuffer));
-				entries.push_back("! Error running command");
-				entries.push_back("!\t" + std::string(err.what()));
-			}
-			else {
-				entries.push_back(textBuffer);
-				entries.push_back(result);
+				if (!result.valid()) {
+					sol::error err = result;
+					entries.push_back(std::string(textBuffer));
+					entries.push_back("! Error running command");
+					entries.push_back("!\t" + std::string(err.what()));
+				}
+				else {
+					entries.push_back(textBuffer);
+					entries.push_back(result);
+				}
+
+
+			} else {
+				entries.push_back("Lua has not been initialized");
 			}
 
 			ImGui::SetItemDefaultFocus();

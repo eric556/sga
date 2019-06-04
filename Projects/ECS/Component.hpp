@@ -12,6 +12,8 @@ class Component {
 public:
 	Component() {};
 	virtual ~Component() {};
+#ifdef IMGUI_SFML
 	virtual void debug() = 0;
+#endif
 	CompConst::ComponentType type = CompConst::ComponentType::BASE;
 };

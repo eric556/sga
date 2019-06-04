@@ -1,17 +1,25 @@
+#define IMGUI_SFML
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include <SFML/Graphics.hpp>
 #include <sol.hpp>
 
 #include <string>
+#include <time.h>
 
 #include <Entity.hpp>
 #include <EntityManager.hpp>
 #include "Display.hpp"
-#include "LuaConsole.hpp"
+#include "MenuBar.hpp"
+
+
+float random(float HI, float LO) {
+	return LO + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (HI - LO)));
+}
 
 int main()
 {
+	srand(static_cast <unsigned> (time(0)));
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "SGA");
 	window.setVerticalSyncEnabled(true);
 	ImGui::SFML::Init(window);
@@ -21,6 +29,12 @@ int main()
 	sol::state lua;
 	lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::os);
 	sf::Color bgColor;
+
+	lua.new_usertype<EntityManager>("em",
+		"entities", sol::var(std::ref(EntityManager::entities)),
+		"entityCount", sol::var(std::ref(EntityManager::entityCount)),
+		"createEntity", &EntityManager::createEntity
+	);
 
 
 	float color[3] = { 0.f, 0.f, 0.f };
@@ -33,12 +47,17 @@ int main()
 		color[2] = b / 255.f;
 	});
 
-	std::vector<std::string> texts;
 
-	Entity entity;
-	entity.addComponent<Display>()->shape.setOutlineColor(sf::Color::Red);
+	MenuBar menuBar;
+	menuBar.init(&lua);
 
-	LuaConsole console(&lua);
+	for (int i = 0; i < 100; i++) {
+		std::shared_ptr<Entity> entity = eManager.createEntity();
+		std::shared_ptr<Display> display = entity->addComponent<Display>();
+		display->shape.setPosition(sf::Vector2f(random(0, 1280), random(0, 720)));
+		display->shape.setSize(sf::Vector2f(10, 10));
+		display->shape.setFillColor(sf::Color::Red);
+	}
 
 	window.resetGLStates();
 	sf::Clock deltaClock;
@@ -54,20 +73,9 @@ int main()
 
 #ifdef _DEBUG
 
-
 		ImGui::SFML::Update(window, deltaClock.restart());
 
-		if (ImGui::BeginMainMenuBar()) {
-			if (ImGui::BeginMenu("Lua")) {
-				if (ImGui::MenuItem("Console", "CTRL-L")) {
-					console.visible = true;
-				}
-				if (ImGui::MenuItem("Run Script")) {}
-
-				ImGui::EndMenu();
-			}
-			ImGui::EndMainMenuBar();
-		}
+		menuBar.Draw();
 
 		ImGui::Begin("Sample Window");
 
@@ -77,15 +85,21 @@ int main()
 			bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
 		}
 
-		entity.getComponent<Display>()->debug();
+		eManager.Debug();
 		
 		ImGui::End();
-
-		console.Draw();
 
 #endif // DEBUG
 
 		window.clear(bgColor);
+
+		auto displayEntities = eManager.getEntitiesByComponent<Display>();
+
+		for (auto entity : displayEntities) {
+			auto display = entity->getComponent<Display>();
+			window.draw(display->shape);
+		}
+
 #ifdef _DEBUG
 		ImGui::SFML::Render(window);
 #endif // DEBUG

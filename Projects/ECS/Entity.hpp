@@ -4,6 +4,12 @@
 #include <memory>
 #include <bitset>
 
+#ifdef IMGUI_SFML
+#include "imgui.h"
+#include "imgui-SFML.h"
+#endif // IMGUI_SFML
+
+
 #include "Component.hpp"
 
 class Entity {
@@ -51,6 +57,16 @@ public:
 
 		return false;
 	}
+
+#ifdef IMGUI_SFML
+	void Debug() {
+		for (auto component : components) {
+			ImGui::Text(std::to_string(id).c_str());
+			component->debug();
+		}
+	}
+#endif // IMGUI_SFML
+
 
 private:
 	std::vector <std::shared_ptr<Component>> components;

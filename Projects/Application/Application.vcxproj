@@ -94,6 +94,8 @@
   <ItemGroup>
     <ClInclude Include="Display.hpp" />
     <ClInclude Include="LuaConsole.hpp" />
+    <ClInclude Include="MenuBar.hpp" />
+    <ClInclude Include="Physics.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp" />

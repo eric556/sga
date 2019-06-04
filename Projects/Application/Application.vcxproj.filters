@@ -16,11 +16,22 @@
     <Filter Include="DebugGUI">
       <UniqueIdentifier>{96d7f856-f0de-4281-8558-6bd33c756a24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{10b0e322-ffc1-46dc-a8cb-ad138fad13d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Display.hpp" />
     <ClInclude Include="LuaConsole.hpp">
       <Filter>DebugGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBar.hpp">
+      <Filter>DebugGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
