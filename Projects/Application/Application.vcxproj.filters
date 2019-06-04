@@ -19,6 +19,9 @@
     <Filter Include="Components">
       <UniqueIdentifier>{10b0e322-ffc1-46dc-a8cb-ad138fad13d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{4c8485f1-3e5e-43a6-b5cd-cc706a19eb08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LuaConsole.hpp">
@@ -32,6 +35,22 @@
     </ClInclude>
     <ClInclude Include="Physics.hpp">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.hpp" />
+    <ClInclude Include="RenderSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GravitySystem.hpp">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

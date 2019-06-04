@@ -15,6 +15,7 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Application</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -92,10 +93,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components.h" />
+    <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Display.hpp" />
+    <ClInclude Include="GravitySystem.hpp" />
     <ClInclude Include="LuaConsole.hpp" />
     <ClInclude Include="MenuBar.hpp" />
     <ClInclude Include="Physics.hpp" />
+    <ClInclude Include="PhysicsSystem.hpp" />
+    <ClInclude Include="RenderSystem.hpp" />
+    <ClInclude Include="Systems.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp" />

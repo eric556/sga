@@ -1,15 +1,19 @@
+#pragma once
+#include <string>
+
 #include "imgui.h"
 #include "imgui-SFML.h"
-
 #include <Component.hpp>
 #include <SFML/Graphics.hpp>
 
-#include <string>
-#include <sstream>
+#include "Constants.hpp"
 
-class Display : public Component {
+class Display : public ECS::Component {
 public:
-	Display() : shape() {}
+	Display() : shape() {
+		type = CompConsts::DISPLAY;
+	}
+
 	Display(sf::Vector2f size, sf::Color color, float outlineThickness = 3.f) {
 		shape = sf::RectangleShape(size);
 		shape.setFillColor(sf::Color(color.r, color.g, color.b, color.a - 100));
@@ -26,7 +30,7 @@ public:
 		color[1] = shape.getFillColor().g / 255.f;
 		color[2] = shape.getFillColor().b / 255.f;
 
-		if (ImGui::ColorEdit3("Background color", color)) {
+		if (ImGui::ColorEdit3("Shape color", color)) {
 			shape.setFillColor(sf::Color(static_cast<sf::Uint8>(color[0] * 255.f), static_cast<sf::Uint8>(color[1] * 255.f), static_cast<sf::Uint8>(color[2] * 255.f)));
 		}
 	}
