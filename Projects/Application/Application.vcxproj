@@ -98,7 +98,10 @@
     <ClInclude Include="Display.hpp" />
     <ClInclude Include="Drag.hpp" />
     <ClInclude Include="DragSystem.hpp" />
+    <ClInclude Include="Friction.hpp" />
+    <ClInclude Include="FrictionSystem.hpp" />
     <ClInclude Include="GravitySystem.hpp" />
+    <ClInclude Include="Helpers.hpp" />
     <ClInclude Include="LuaConsole.hpp" />
     <ClInclude Include="MenuBar.hpp" />
     <ClInclude Include="Physics.hpp" />

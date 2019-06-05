@@ -31,11 +31,11 @@ int main()
 	lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::os);
 	sf::Color bgColor;
 
-	lua.new_usertype<ECS::EntityManager>("em",
-		"entities", sol::var(std::ref(ECS::EntityManager::entities)),
-		"entityCount", sol::var(std::ref(ECS::EntityManager::entityCount)),
-		"createEntity", &ECS::EntityManager::createEntity
-	);
+	// lua.new_usertype<ECS::EntityManager>("em",
+	// 	"entities", sol::var(std::ref(ECS::EntityManager::entities)),
+	// 	"entityCount", sol::var(std::ref(ECS::EntityManager::entityCount)),
+	// 	"createEntity", &ECS::EntityManager::createEntity
+	// );
 
 
 	float color[3] = { 0.f, 0.f, 0.f };
@@ -52,26 +52,33 @@ int main()
 	Debug::MenuBar menuBar;
 	menuBar.init(&lua);
 
-	for (int i = 0; i < 100; i++) {
-		std::shared_ptr<ECS::Entity> entity = eManager.createEntity();
-		std::shared_ptr<Components::Display> display = entity->addComponent<Components::Display>();
-		display->shape.setSize(sf::Vector2f(10, 10));
-		display->shape.setFillColor(sf::Color::Red);
-	
-		std::shared_ptr<Components::Physics> physics = entity->addComponent<Components::Physics>();
-		physics->position = sf::Vector3f(random(0, 1280), random(0, 720), 0.0f );
-		physics->mass = random(1, 100);
-		physics->surfaceArea = 0.01f;
-	
-		entity->addComponent(Components::GRAVITY);
-		entity->addComponent(Components::MOVEABLE);
-	}
-
+	// for (int i = 0; i < 100; i++) {
+	// 	std::shared_ptr<ECS::Entity> entity = eManager.createEntity();
+	// 	std::shared_ptr<Components::Display> display = entity->addComponent<Components::Display>();
+	// 	display->shape.setSize(sf::Vector2f(10, 10));
+	// 	display->shape.setFillColor(sf::Color::Red);
+	// 
+	// 	std::shared_ptr<Components::Physics> physics = entity->addComponent<Components::Physics>();
+	// 	physics->position = sf::Vector3f(random(0, 1280), random(0, 720), 0.0f );
+	// 	physics->mass = random(1, 100);
+	// 
+	// 	entity->addComponent(Components::GRAVITY);
+	// 	entity->addComponent(Components::MOVEABLE);
+	// }
+	// 
 	std::shared_ptr<ECS::Entity> player = eManager.createEntity();
 	std::shared_ptr<Components::Physics> playerPhysics = player->addComponent<Components::Physics>();
 	std::shared_ptr<Components::Display> playerDisplay = player->addComponent<Components::Display>();
+	playerDisplay->shape.setSize(sf::Vector2f(10.0f, 10.0f));
+	playerPhysics->position = sf::Vector3f(1920.f / 2.f, 1080.f / 2, 0.0f);
+	playerPhysics->mass = 20.0f;
 	player->name = "Player";
 	player->addComponent(Components::INPUT);
+	player->addComponent(Components::MOVEABLE);
+
+	auto playerFriction = player->addComponent<Components::Friction>();
+	playerFriction->frictionCoff = 1.0f;
+	playerFriction->normal = sf::Vector3f(0.0f, 0.0f, Systems::GRAV_CONST * playerPhysics->mass);
 
 	window.resetGLStates();
 	sf::Clock deltaClock;
@@ -88,9 +95,7 @@ int main()
 		sf::Time dt = deltaClock.restart();
 
 		Systems::PlayerInputSystem();
-
-		Systems::DragSystem();
-		Systems::GravitySystem();
+		Systems::FrictionSystem();
 		Systems::PhysicsSystem(dt.asSeconds());
 
 		window.clear(bgColor);

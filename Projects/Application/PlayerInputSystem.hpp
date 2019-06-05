@@ -11,17 +11,25 @@ namespace Systems {
 		for (auto entity : entities) {
 			auto physics = entity->getComponent<Components::Physics>();
 
+			sf::Vector3f force(0.0f, 0.0f, 0.0f);
+
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-				physics->velocity = sf::Vector3f(0, -100.f, 0.0f);
-			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-				physics->velocity = sf::Vector3f(0, 100.f, 0.0f);
-			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-				physics->velocity = sf::Vector3f(-100.0f, 0.0f, 0.0f);
-			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-				physics->velocity = sf::Vector3f(100.0f, 0.0f, 0.0f);
+				force += sf::Vector3f(0.0f, -100.0f, 0.0f);
 			}
-			else {
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+				force += sf::Vector3f(0.0f, 100.0f, 0.0f);
 			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+				force += sf::Vector3f(-100.0f, 0.0f, 0.0f);
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+				force += sf::Vector3f(100.0f, 0.0f, 0.0f);
+			}
+
+			physics->forceAccumulator += force;
 		}
 	}
 }

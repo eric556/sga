@@ -4,6 +4,8 @@
 #include "Physics.hpp"
 #include "Drag.hpp"
 
+#include "Helpers.hpp"
+
 static inline const float AIR_DENSITY = 1.f; // kg/m^3 
 
 namespace Systems {
@@ -15,7 +17,7 @@ namespace Systems {
 			auto physics = entity->getComponent<Components::Physics>();
 			auto drag = entity->getComponent<Components::Drag>();
 
-			float speed = std::sqrtf(physics->velocity.x * physics->velocity.x + physics->velocity.y * physics->velocity.y + physics->velocity.z * physics->velocity.z);
+			float speed = Math::mag(physics->velocity);
 			sf::Vector3f dragDir = physics->velocity /= ((speed == 0.0f)? 1.0f: speed);
 			dragDir *= -1.0f;
 
@@ -23,6 +25,7 @@ namespace Systems {
 
 
 			physics->forceAccumulator += (dragDir * dragMag);
+			entity->removeComp<Components::Drag>();
 		}
 	}
 }

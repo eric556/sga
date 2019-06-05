@@ -105,30 +105,32 @@ namespace ECS {
 		bool hasComponents(unsigned int flag) {
 			if (!hasComponent(flag)) return false;
 
-			return hasComponents<T1, T2, rest>();
+			return hasComponents<T1, T2, rest...>();
 		}
 
 		template<class T1, class T2, class... rest>
 		bool hasComponents(unsigned int flags[], int numFlags) {
 			if (!hasComponents(flags, numFlags)) return false;
 
-			return hasComponents<T1, T2, rest>();
+			return hasComponents<T1, T2, rest...>();
 		}
 
 		template<class T>
 		bool removeComp() {
 			T c;
-			for (auto comp : components) {
-				if (comp->type == c.type) {
+			for (int i = 0; i < components.size(); i++) {
+				if (components[i]->type == c.type) {
 					componentFlags.set(c.type, false);
-
-
+					components.erase(components.begin() + i);
+					return true;
 				}
 			}
+
+			return false;
 		}
 
-		bool removeComp(unsigned int) {
-
+		void removeComp(unsigned int flag) {
+			componentFlags.set(flag, false);
 		}
 
 #ifdef IMGUI_SFML

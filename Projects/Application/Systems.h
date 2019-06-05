@@ -4,3 +4,4 @@
 #include "GravitySystem.hpp"
 #include "PlayerInputSystem.hpp"
 #include "DragSystem.hpp"
+#include "FrictionSystem.hpp"

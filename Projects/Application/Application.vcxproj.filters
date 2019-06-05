@@ -61,6 +61,13 @@
     <ClInclude Include="Drag.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="FrictionSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Friction.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp">

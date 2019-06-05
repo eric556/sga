@@ -8,7 +8,8 @@ namespace Components{
 		GRAVITY,
 		INPUT,
 		MOVEABLE,
-		DRAG
+		DRAG,
+		FRICTION
 	};
 
 	static const float MIN_MASS = 0.0001f;
