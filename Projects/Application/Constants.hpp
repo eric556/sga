@@ -1,11 +1,15 @@
 #pragma once
 
-namespace CompConsts{
+namespace Components{
 	enum ComponentType {
 		BASE = 0,
 		DISPLAY,
 		PHYSICS,
 		GRAVITY,
-		INPUT
+		INPUT,
+		MOVEABLE,
+		DRAG
 	};
+
+	static const float MIN_MASS = 0.0001f;
 }

@@ -46,6 +46,16 @@ namespace ECS {
 			return nullptr;
 		}
 
+		std::shared_ptr<Entity> getEntityByName(std::string name) {
+			for (auto& entity : entities) {
+				if (entity->name == name) {
+					return entity;
+				}
+			}
+
+			return nullptr;
+		}
+
 		template<class T>
 		std::vector<std::shared_ptr<Entity>> getEntitiesByComponent() {
 			std::vector<std::shared_ptr<Entity>> retEntities;
@@ -129,7 +139,13 @@ namespace ECS {
 			if (!ImGui::CollapsingHeader("Entities"))
 				return;
 			for (auto entity : entities) {
-				std::string entityHeader = "Entity " + std::to_string(entity->id);
+				std::string entityHeader = "";
+				if (entity->name == "") {
+					entityHeader = "Entity " + std::to_string(entity->id);
+
+				} else {
+					entityHeader = entity->name;
+				}
 				if (ImGui::TreeNode(entityHeader.c_str())) {
 					entity->Debug();
 					ImGui::TreePop();

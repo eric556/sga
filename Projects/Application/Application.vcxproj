@@ -96,6 +96,8 @@
     <ClInclude Include="Components.h" />
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Display.hpp" />
+    <ClInclude Include="Drag.hpp" />
+    <ClInclude Include="DragSystem.hpp" />
     <ClInclude Include="GravitySystem.hpp" />
     <ClInclude Include="LuaConsole.hpp" />
     <ClInclude Include="MenuBar.hpp" />

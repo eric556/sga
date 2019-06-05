@@ -9,11 +9,12 @@ namespace Systems {
 
 	static void GravitySystem() {
 		ECS::EntityManager eManager;
-		auto physicsEntities = eManager.getEntitiesByComponent<Physics>(CompConsts::GRAVITY);
+		auto physicsEntities = eManager.getEntitiesByComponent<Components::Physics>(Components::GRAVITY);
 
 		for (auto entity : physicsEntities) {
-			auto physics = entity->getComponent<Physics>();
-			physics->forceAccumulator += sf::Vector2f(0, GRAV_CONST);
+			auto physics = entity->getComponent<Components::Physics>();
+			// physics->forceAccumulator += sf::Vector3f(0.f, GRAV_CONST, 0.f);
+			physics->forceAccumulator += sf::Vector3f(0.0f, GRAV_CONST * physics->mass, 0.0f);
 		}
 	}
 }

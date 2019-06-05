@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <bitset>
+#include <string>
 
 #ifdef IMGUI_SFML
 #include "imgui.h"
@@ -20,6 +21,7 @@ namespace ECS {
 	class Entity {
 	public:
 		unsigned int id;
+		std::string name = "";
 
 		Entity(unsigned int id = 0) {
 			this->id = id;
@@ -113,11 +115,27 @@ namespace ECS {
 			return hasComponents<T1, T2, rest>();
 		}
 
+		template<class T>
+		bool removeComp() {
+			T c;
+			for (auto comp : components) {
+				if (comp->type == c.type) {
+					componentFlags.set(c.type, false);
+
+
+				}
+			}
+		}
+
+		bool removeComp(unsigned int) {
+
+		}
+
 #ifdef IMGUI_SFML
 		void Debug() {
 			if (ImGui::TreeNode("Components")) {
 				for (auto component : components) {
-					if (ImGui::TreeNode(std::to_string(component->type).c_str())) {
+					if (ImGui::TreeNode(component->name.c_str())) {
 						component->debug();
 						ImGui::TreePop();
 					}
