@@ -1,23 +1,20 @@
 #pragma once
 #include "imgui.h"
 #include "imgui-SFML.h"
-#include <sol.hpp>
-
 
 #include <vector>
 #include <string>
 #include <memory>
 
+#include "LuaInstance.hpp"
+
 namespace Debug {
 	class LuaConsole {
 	public:
-		LuaConsole() : lua(nullptr) {
+		LuaConsole() {
 			textBuffer[0] = 0;
+			filePathBuffer[0] = 0;
 			visible = false;
-		}
-
-		void init(sol::state* luaState) {
-			lua = luaState;
 		}
 
 		~LuaConsole() {}
@@ -25,11 +22,13 @@ namespace Debug {
 		void Draw() {
 			if (!visible) return;
 			ImGui::Begin("Lua Console", 0, ImGuiWindowFlags_MenuBar);
+			bool fileMenuOpen = false;
 			if (ImGui::BeginMenuBar()) {
 				if (ImGui::BeginMenu("File"))
 				{
 					if (ImGui::MenuItem("Open Script", "CTRL-O")) {
 						// todo load file here
+						fileMenuOpen = true;
 					}
 
 					if (ImGui::MenuItem("Clear")) {
@@ -43,6 +42,30 @@ namespace Debug {
 					ImGui::EndMenu();
 				}
 				ImGui::EndMenuBar();
+
+				if (fileMenuOpen) {
+					ImGui::OpenPopup("fileExplorer");
+				}
+
+				if (ImGui::BeginPopupModal("fileExplorer")) {
+					if (ImGui::InputText("File Path", filePathBuffer, 255, ImGuiInputTextFlags_EnterReturnsTrue)) {
+						auto result = Lua::LuaInstance::MainState.safe_script_file(std::string(filePathBuffer), sol::load_mode::text);
+
+						if (!result.valid()) {
+							sol::error err = result;
+							entries.push_back(std::string(err.what()));
+						}
+						else {
+							entries.push_back(result);
+						}
+						ImGui::CloseCurrentPopup();
+					}
+
+					if (ImGui::Button("Cancel")) {
+						ImGui::CloseCurrentPopup();
+					}
+					ImGui::EndPopup();
+				}
 			}
 
 			const float footer_height_to_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing(); // 1 separator, 1 input text
@@ -58,25 +81,19 @@ namespace Debug {
 
 
 			if (ImGui::InputTextMultiline("", textBuffer, 255, ImVec2(-1.0f, ImGui::GetTextLineHeight() + 15), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine | ImGuiInputTextFlags_AllowTabInput)) {
-				if (lua != nullptr) {
-					auto result = lua->safe_script(textBuffer, sol::script_pass_on_error);
+				auto result = Lua::LuaInstance::MainState.safe_script(textBuffer, sol::script_pass_on_error);
 
-					if (!result.valid()) {
-						sol::error err = result;
-						entries.push_back(std::string(textBuffer));
-						entries.push_back("! Error running command");
-						entries.push_back("!\t" + std::string(err.what()));
-					}
-					else {
-						entries.push_back(textBuffer);
-						entries.push_back(result);
-					}
-
-
+				if (!result.valid()) {
+					sol::error err = result;
+					entries.push_back(std::string(textBuffer));
+					entries.push_back("! Error running command");
+					entries.push_back("!\t" + std::string(err.what()));
 				}
 				else {
-					entries.push_back("Lua has not been initialized");
+					entries.push_back(textBuffer);
+					entries.push_back(result);
 				}
+
 
 				ImGui::SetItemDefaultFocus();
 				ImGui::SetKeyboardFocusHere(-1); // Auto focus previous widget
@@ -89,7 +106,7 @@ namespace Debug {
 		bool visible;
 	private:
 		char textBuffer[255];
+		char filePathBuffer[255];
 		std::vector<std::string> entries;
-		sol::state* lua;
 	};
 }

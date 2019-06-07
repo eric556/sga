@@ -9,7 +9,7 @@
 
 #include <Entity.hpp>
 #include <EntityManager.hpp>
-#include "Components.h"
+#include "ComponentRegistry.hpp"
 #include "Systems.h"
 #include "MenuBar.hpp"
 
@@ -24,61 +24,38 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SGA");
 	window.setVerticalSyncEnabled(true);
 	ImGui::SFML::Init(window);
+	Lua::LuaInstance::init();
+	Components::RegisterComponents();
 
 
 	ECS::EntityManager eManager;
-	sol::state lua;
-	lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::os);
 	sf::Color bgColor;
-
-	// lua.new_usertype<ECS::EntityManager>("em",
-	// 	"entities", sol::var(std::ref(ECS::EntityManager::entities)),
-	// 	"entityCount", sol::var(std::ref(ECS::EntityManager::entityCount)),
-	// 	"createEntity", &ECS::EntityManager::createEntity
-	// );
-
 
 	float color[3] = { 0.f, 0.f, 0.f };
 	char consoleBuffer[255] = "";
 
-	lua.set_function("changeBG", [&bgColor, &color](int r, int g, int b, int a) { 
-		bgColor = sf::Color(r, g, b, a);
-		color[0] = r / 255.f;
-		color[1] = g / 255.f;
-		color[2] = b / 255.f;
-	});
+	// lua.set_function("changeBG", [&bgColor, &color](int r, int g, int b, int a) { 
+	// 	bgColor = sf::Color(r, g, b, a);
+	// 	color[0] = r / 255.f;
+	// 	color[1] = g / 255.f;
+	// 	color[2] = b / 255.f;
+	// });
 
 
 	Debug::MenuBar menuBar;
-	menuBar.init(&lua);
 
-	// for (int i = 0; i < 100; i++) {
-	// 	std::shared_ptr<ECS::Entity> entity = eManager.createEntity();
-	// 	std::shared_ptr<Components::Display> display = entity->addComponent<Components::Display>();
-	// 	display->shape.setSize(sf::Vector2f(10, 10));
-	// 	display->shape.setFillColor(sf::Color::Red);
-	// 
-	// 	std::shared_ptr<Components::Physics> physics = entity->addComponent<Components::Physics>();
-	// 	physics->position = sf::Vector3f(random(0, 1280), random(0, 720), 0.0f );
-	// 	physics->mass = random(1, 100);
-	// 
-	// 	entity->addComponent(Components::GRAVITY);
-	// 	entity->addComponent(Components::MOVEABLE);
-	// }
-	// 
-	std::shared_ptr<ECS::Entity> player = eManager.createEntity();
-	std::shared_ptr<Components::Physics> playerPhysics = player->addComponent<Components::Physics>();
-	std::shared_ptr<Components::Display> playerDisplay = player->addComponent<Components::Display>();
-	playerDisplay->shape.setSize(sf::Vector2f(10.0f, 10.0f));
-	playerPhysics->position = sf::Vector3f(1920.f / 2.f, 1080.f / 2, 0.0f);
-	playerPhysics->mass = 20.0f;
-	player->name = "Player";
-	player->addComponent(Components::INPUT);
-	player->addComponent(Components::MOVEABLE);
-
-	auto playerFriction = player->addComponent<Components::Friction>();
-	playerFriction->frictionCoff = 1.0f;
-	playerFriction->normal = sf::Vector3f(0.0f, 0.0f, Systems::GRAV_CONST * playerPhysics->mass);
+	// std::shared_ptr<ECS::Entity> player = eManager.createEntity();
+	// std::shared_ptr<Components::KineticBody> playerPhysics = player->addComponent<Components::KineticBody>();
+	// std::shared_ptr<Components::Transform> playerTransform = player->addComponent<Components::Transform>();
+	// std::shared_ptr<Components::Display> playerDisplay = player->addComponent<Components::Display>();
+	// playerDisplay->shape.setSize(sf::Vector2f(10.0f, 10.0f));
+	// playerDisplay->shape.setOrigin(sf::Vector2f(5.f, 5.f));
+	// playerTransform->position = sf::Vector3f(1920.f / 2.f, 1080.f / 2, 0.0f);
+	// playerPhysics->mass = 20.0f;
+	// player->name = "Player";
+	// std::shared_ptr<Components::Input> playerInput = player->addComponent<Components::Input>();
+	// playerInput->speed = 500.0f;
+	// player->addComponent(Components::MOVEABLE);
 
 	window.resetGLStates();
 	sf::Clock deltaClock;
@@ -94,7 +71,8 @@ int main()
 
 		sf::Time dt = deltaClock.restart();
 
-		Systems::PlayerInputSystem();
+		Systems::PlayerInputSystem(dt.asSeconds(), window);
+		Systems::GravitySystem();
 		Systems::FrictionSystem();
 		Systems::PhysicsSystem(dt.asSeconds());
 
@@ -104,7 +82,7 @@ int main()
 #ifdef _DEBUG
 		ImGui::SFML::Update(window, dt);
 		menuBar.Draw();
-		ImGui::Begin("Sample Window");
+		ImGui::Begin("Entity Manager");
 		eManager.Debug();
 		ImGui::End();
 		ImGui::SFML::Render(window);

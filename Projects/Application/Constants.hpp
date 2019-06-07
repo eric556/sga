@@ -4,13 +4,19 @@ namespace Components{
 	enum ComponentType {
 		BASE = 0,
 		DISPLAY,
-		PHYSICS,
+		KINETIC_BODY,
 		GRAVITY,
 		INPUT,
 		MOVEABLE,
 		DRAG,
-		FRICTION
+		FRICTION,
+		TRANSFORM
 	};
 
 	static const float MIN_MASS = 0.0001f;
+}
+
+namespace Math {
+	const float  PI_F = 3.14159265358979f;
+	const float RADIAN_TO_DEGREES = 180.f / PI_F;
 }

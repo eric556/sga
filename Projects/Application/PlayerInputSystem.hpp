@@ -1,35 +1,41 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <EntityManager.hpp>
-#include "Physics.hpp"
+#include "KineticBody.hpp"
+#include "Input.hpp"
 
 namespace Systems {
-	static void PlayerInputSystem() {
+	static void PlayerInputSystem(float dt, sf::RenderWindow& window) {
 		ECS::EntityManager eManager;
-		auto entities = eManager.getEntitiesByComponent<Components::Physics>(Components::INPUT);
+		auto entities = eManager.getEntitiesByComponents<Components::Transform, Components::Input>();
 
 		for (auto entity : entities) {
-			auto physics = entity->getComponent<Components::Physics>();
+			auto transform = entity->getComponent<Components::Transform>();
+			auto input = entity->getComponent<Components::Input>();
 
-			sf::Vector3f force(0.0f, 0.0f, 0.0f);
+			sf::Vector3f move(0.0f, 0.0f, 0.0f);
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-				force += sf::Vector3f(0.0f, -100.0f, 0.0f);
+				move += sf::Vector3f(0.0f, -input->speed, 0.0f);
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-				force += sf::Vector3f(0.0f, 100.0f, 0.0f);
+				move += sf::Vector3f(0.0f, input->speed, 0.0f);
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-				force += sf::Vector3f(-100.0f, 0.0f, 0.0f);
+				move += sf::Vector3f(-input->speed, 0.0f, 0.0f);
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-				force += sf::Vector3f(100.0f, 0.0f, 0.0f);
+				move += sf::Vector3f(input->speed, 0.0f, 0.0f);
 			}
 
-			physics->forceAccumulator += force;
+			transform->position += move * dt;
+
+			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+			float angle = std::atan2(mousePosition.x - transform->position.x, mousePosition.y - transform->position.y) * Math::RADIAN_TO_DEGREES;
+			transform->rotation = -angle;
 		}
 	}
 }

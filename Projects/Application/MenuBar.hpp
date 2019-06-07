@@ -14,10 +14,6 @@ namespace Debug {
 			visible = true;
 		}
 
-		void init(sol::state* luaState) {
-			console.init(luaState);
-		}
-
 		void Draw() {
 			if (!visible) return;
 			if (ImGui::BeginMainMenuBar()) {

@@ -93,6 +93,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ComponentRegistry.hpp" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Display.hpp" />
@@ -102,13 +103,16 @@
     <ClInclude Include="FrictionSystem.hpp" />
     <ClInclude Include="GravitySystem.hpp" />
     <ClInclude Include="Helpers.hpp" />
+    <ClInclude Include="Input.hpp" />
     <ClInclude Include="LuaConsole.hpp" />
+    <ClInclude Include="LuaInstance.hpp" />
     <ClInclude Include="MenuBar.hpp" />
-    <ClInclude Include="Physics.hpp" />
+    <ClInclude Include="KineticBody.hpp" />
     <ClInclude Include="PhysicsSystem.hpp" />
     <ClInclude Include="PlayerInputSystem.hpp" />
     <ClInclude Include="RenderSystem.hpp" />
     <ClInclude Include="Systems.h" />
+    <ClInclude Include="Transform.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp" />
@@ -117,6 +121,9 @@
     <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

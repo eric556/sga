@@ -1,7 +1,7 @@
 #pragma once
 
 #include <EntityManager.hpp>
-#include "Physics.hpp"
+#include "KineticBody.hpp"
 
 
 namespace Systems {
@@ -9,12 +9,11 @@ namespace Systems {
 
 	static void GravitySystem() {
 		ECS::EntityManager eManager;
-		auto physicsEntities = eManager.getEntitiesByComponent<Components::Physics>(Components::GRAVITY);
+		auto physicsEntities = eManager.getEntitiesByComponent<Components::KineticBody>(Components::GRAVITY);
 
 		for (auto entity : physicsEntities) {
-			auto physics = entity->getComponent<Components::Physics>();
-			// physics->forceAccumulator += sf::Vector3f(0.f, GRAV_CONST, 0.f);
-			physics->forceAccumulator += sf::Vector3f(0.0f, GRAV_CONST * physics->mass, 0.0f);
+			auto kb = entity->getComponent<Components::KineticBody>();
+			kb->forceAccumulator += sf::Vector3f(0.0f, GRAV_CONST * kb->mass, 0.0f);
 		}
 	}
 }

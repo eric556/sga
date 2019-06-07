@@ -22,6 +22,9 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{4c8485f1-3e5e-43a6-b5cd-cc706a19eb08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{afa2aa34-2a4a-40a6-adda-0515b053dc79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LuaConsole.hpp">
@@ -31,9 +34,6 @@
       <Filter>DebugGUI</Filter>
     </ClInclude>
     <ClInclude Include="Display.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.hpp">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Constants.hpp" />
@@ -68,6 +68,19 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Helpers.hpp" />
+    <ClInclude Include="Transform.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="KineticBody.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaInstance.hpp" />
+    <ClInclude Include="ComponentRegistry.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp">
@@ -86,5 +99,10 @@
       <Filter>Libraries\IMGUI\imgui</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test.lua">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>
