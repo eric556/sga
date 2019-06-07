@@ -22,9 +22,6 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{4c8485f1-3e5e-43a6-b5cd-cc706a19eb08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts">
-      <UniqueIdentifier>{afa2aa34-2a4a-40a6-adda-0515b053dc79}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LuaConsole.hpp">
@@ -99,10 +96,5 @@
       <Filter>Libraries\IMGUI\imgui</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="test.lua">
-      <Filter>Scripts</Filter>
-    </None>
   </ItemGroup>
 </Project>

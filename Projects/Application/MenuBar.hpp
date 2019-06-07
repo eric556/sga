@@ -25,6 +25,12 @@ namespace Debug {
 
 					ImGui::EndMenu();
 				}
+
+				if (ImGui::BeginMenu("Clear Level")) {
+					Lua::LuaInstance::MainState = {};
+					Lua::LuaInstance::init();
+					ImGui::EndMenu();
+				}
 				ImGui::EndMainMenuBar();
 			}
 

@@ -44,12 +44,13 @@ namespace Debug {
 				ImGui::EndMenuBar();
 
 				if (fileMenuOpen) {
-					ImGui::OpenPopup("fileExplorer");
+					ImGui::OpenPopup("File Picker");
+					ImGui::SetNextWindowSize(sf::Vector2f(400, 200));
 				}
 
-				if (ImGui::BeginPopupModal("fileExplorer")) {
+				if (ImGui::BeginPopupModal("File Picker")) {
 					if (ImGui::InputText("File Path", filePathBuffer, 255, ImGuiInputTextFlags_EnterReturnsTrue)) {
-						auto result = Lua::LuaInstance::MainState.safe_script_file(std::string(filePathBuffer), sol::load_mode::text);
+						auto result = Lua::LuaInstance::MainState.safe_script_file(std::string(filePathBuffer), sol::script_pass_on_error, sol::load_mode::text);
 
 						if (!result.valid()) {
 							sol::error err = result;
