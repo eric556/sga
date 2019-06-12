@@ -5,11 +5,6 @@
 #include <bitset>
 #include <string>
 
-#ifdef IMGUI_SFML
-#include "imgui.h"
-#include "imgui-SFML.h"
-#endif // IMGUI_SFML
-
 #ifndef MAX_COMPONENTS
 #define MAX_COMPONENTS 128
 #endif // !MAX_COMPONENTS
@@ -133,22 +128,8 @@ namespace ECS {
 			componentFlags.set(flag, false);
 		}
 
-#ifdef IMGUI_SFML
-		void Debug() {
-			if (ImGui::TreeNode("Components")) {
-				for (auto component : components) {
-					if (ImGui::TreeNode(component->name.c_str())) {
-						component->debug();
-						ImGui::TreePop();
-					}
-				}
-				ImGui::TreePop();
-			}
-		}
-#endif // IMGUI_SFML
 
-
-	private:
+	public:
 		std::vector <std::shared_ptr<Component>> components;
 		std::bitset<MAX_COMPONENTS> componentFlags;
 	};

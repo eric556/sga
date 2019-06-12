@@ -134,27 +134,6 @@ namespace ECS {
 			return retEntities;
 		}
 
-#ifdef IMGUI_SFML
-		void Debug() {
-			if (!ImGui::CollapsingHeader("Entities"))
-				return;
-			for (auto entity : entities) {
-				std::string entityHeader = "";
-				if (entity->name == "") {
-					entityHeader = "Entity " + std::to_string(entity->id);
-
-				} else {
-					entityHeader = entity->name;
-				}
-				if (ImGui::TreeNode(entityHeader.c_str())) {
-					entity->Debug();
-					ImGui::TreePop();
-				}
-			}
-		}
-#endif // IMGUI_SFML
-
-
 	public:
 		static inline std::vector<std::shared_ptr<Entity>> entities;
 		static inline unsigned int entityCount;

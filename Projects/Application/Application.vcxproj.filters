@@ -13,70 +13,88 @@
     <Filter Include="Libraries\IMGUI\imgui-sfml">
       <UniqueIdentifier>{15EE0082-01FE-AC52-6AB7-117156E69BEB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DebugGUI">
-      <UniqueIdentifier>{96d7f856-f0de-4281-8558-6bd33c756a24}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{10b0e322-ffc1-46dc-a8cb-ad138fad13d2}</UniqueIdentifier>
+    <Filter Include="src\Components">
+      <UniqueIdentifier>{221ADC4D-0EE8-CF53-F77B-407AE3E8ABB8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems">
-      <UniqueIdentifier>{4c8485f1-3e5e-43a6-b5cd-cc706a19eb08}</UniqueIdentifier>
+    <Filter Include="src\DebugGUI">
+      <UniqueIdentifier>{C8457CB9-B4A8-0B5E-5D2E-44144970D7E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DebugGUI\ComponentDebug">
+      <UniqueIdentifier>{51373110-BD44-5FF6-462B-5BE1B2372BAD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Resources">
+      <UniqueIdentifier>{D76C8757-432D-038E-0C68-4C0B78E7476A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Systems">
+      <UniqueIdentifier>{34DEBD24-A093-361A-2988-30F1953C2D1E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LuaConsole.hpp">
-      <Filter>DebugGUI</Filter>
+    <ClInclude Include="src\Components\AnimatedSprite.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
-    <ClInclude Include="MenuBar.hpp">
-      <Filter>DebugGUI</Filter>
+    <ClInclude Include="src\Components\ComponentRegister.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Display.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\Components\Display.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.hpp" />
-    <ClInclude Include="RenderSystem.hpp">
-      <Filter>Systems</Filter>
+    <ClInclude Include="src\Components\Input.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\Components\KineticBody.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Systems.h">
-      <Filter>Systems</Filter>
+    <ClInclude Include="src\Components\Sprite.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsSystem.hpp">
-      <Filter>Systems</Filter>
+    <ClInclude Include="src\Components\Transform.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
-    <ClInclude Include="GravitySystem.hpp">
-      <Filter>Systems</Filter>
+    <ClInclude Include="src\Constants.hpp">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerInputSystem.hpp">
-      <Filter>Systems</Filter>
+    <ClInclude Include="src\DebugGUI\ComponentDebug\EMDebug.hpp">
+      <Filter>src\DebugGUI\ComponentDebug</Filter>
     </ClInclude>
-    <ClInclude Include="DragSystem.hpp">
-      <Filter>Systems</Filter>
+    <ClInclude Include="src\DebugGUI\GuiElement.h">
+      <Filter>src\DebugGUI</Filter>
     </ClInclude>
-    <ClInclude Include="Drag.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\DebugGUI\LuaConsole.h">
+      <Filter>src\DebugGUI</Filter>
     </ClInclude>
-    <ClInclude Include="FrictionSystem.hpp">
-      <Filter>Systems</Filter>
+    <ClInclude Include="src\DebugGUI\MenuBar.h">
+      <Filter>src\DebugGUI</Filter>
     </ClInclude>
-    <ClInclude Include="Friction.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\Helpers.hpp">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Helpers.hpp" />
-    <ClInclude Include="Transform.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\LuaInstance.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="KineticBody.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\Resources\AssetManager.hpp">
+      <Filter>src\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Input.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\Resources\ResourceManager.h">
+      <Filter>src\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="LuaInstance.hpp" />
-    <ClInclude Include="ComponentRegistry.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="src\Systems\GravitySystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\PhysicsSystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\PlayerInputSystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\RenderSystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\RenderTextureSystem.h">
+      <Filter>src\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +113,56 @@
     <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_widgets.cpp">
       <Filter>Libraries\IMGUI\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Components\AnimatedSprite.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\ComponentRegister.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Display.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Input.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\KineticBody.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Sprite.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Transform.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugGUI\LuaConsole.cpp">
+      <Filter>src\DebugGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugGUI\MenuBar.cpp">
+      <Filter>src\DebugGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaInstance.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\ResourceManager.cpp">
+      <Filter>src\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\GravitySystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\PhysicsSystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\PlayerInputSystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\RenderSystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\RenderTextureSystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

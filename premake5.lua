@@ -108,14 +108,26 @@ project "ECS"
     files "Projects/ECS/*.hpp"
     files "Projects/ECS/*.h"
 
+    files "Projects/ECS/*/*.cpp"
+    files "Projects/ECS/*/*.hpp"
+    files "Projects/ECS/*/*.h"
+
 project "Application"
     location "Projects/Application"
     kind "ConsoleApp"
     cppdialect "C++17"
 
-    files "Projects/Application/*.cpp"
-    files "Projects/Application/*.h"
-    files "Projects/Application/*.hpp"
+    files "Projects/Application/src/*.cpp"
+    files "Projects/Application/src/*.h"
+    files "Projects/Application/src/*.hpp"
+
+    files "Projects/Application/src/*/*.cpp"
+    files "Projects/Application/src/*/*.h"
+    files "Projects/Application/src/*/*.hpp"
+
+    files "Projects/Application/src/*/*/*.cpp"
+    files "Projects/Application/src/*/*/*.h"
+    files "Projects/Application/src/*/*/*.hpp"
 
     includeSFML()
     linkSFML()
