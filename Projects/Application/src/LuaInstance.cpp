@@ -14,7 +14,7 @@ namespace Lua {
 			sol::constructors <sf::Vector2f(float, float)>(),
 			"x", &sf::Vector2f::x,
 			"y", &sf::Vector2f::y
-			);
+		);
 
 
 		MainState.new_usertype<sf::Vector3f>("Vector3",
@@ -22,7 +22,7 @@ namespace Lua {
 			"x", &sf::Vector3f::x,
 			"y", &sf::Vector3f::y,
 			"z", &sf::Vector3f::z
-			);
+		);
 
 
 		MainState.new_usertype<sf::Color>("Color",
@@ -31,7 +31,7 @@ namespace Lua {
 			"g", &sf::Color::g,
 			"b", &sf::Color::b,
 			"a", &sf::Color::a
-			);
+		);
 
 
 		MainState.new_usertype<sf::RectangleShape>("RectangleShape",
@@ -39,8 +39,11 @@ namespace Lua {
 			"setSize", &sf::RectangleShape::setSize,
 			"setColor", &sf::RectangleShape::setFillColor,
 			"setOrigin", sol::resolve<void(float, float)>(&sf::RectangleShape::setOrigin)
-			);
+		);
 
+		MainState.new_usertype<sf::Sprite>("Sprite",
+			"setOrigin", sol::resolve<void(float, float)>(&sf::Sprite::setOrigin)
+		);
 
 		MainState.new_enum("Tags",
 			"GRAVITY", Components::ComponentType::GRAVITY,
@@ -53,7 +56,7 @@ namespace Lua {
 			"createEntity", &ECS::EntityManager::createEntity,
 			"deleteEntity", &ECS::EntityManager::deleteEntity,
 			"getEntity", &ECS::EntityManager::getEntityByID
-			);
+		);
 
 		MainState["entityManager"] = ECS::EntityManager();
 
@@ -63,7 +66,7 @@ namespace Lua {
 			"name", &ECS::Entity::name,
 			"addTag", &ECS::Entity::addComponent,
 			"removeTag", &ECS::Entity::removeComp
-			);
+		);
 	}
 
 	sol::state_view LuaInstance::getStateView() {

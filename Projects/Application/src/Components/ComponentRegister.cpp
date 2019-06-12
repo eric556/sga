@@ -5,7 +5,8 @@
 #include "Transform.h"
 #include "Sprite.h"
 #include "AnimatedSprite.h"
-
+#include <sol.hpp>
+#include <iostream>
 
 namespace Components {
 
@@ -33,5 +34,27 @@ namespace Components {
 
 		auto animatedSpriteType = instance.registerComponent<AnimatedSprite>("AnimatedSprite");
 		animatedSpriteType.set("texture_id", &Components::AnimatedSprite::id);
+		animatedSpriteType.set("currentAnimation", &Components::AnimatedSprite::currentAnimation);
+		animatedSpriteType.set_function("setCurrentAnimation", &Components::AnimatedSprite::setCurrentAnimation);
+		animatedSpriteType.set("currentAnimationFrame", &Components::AnimatedSprite::currentAnimationFrame);
+		animatedSpriteType.set("sprite", &Components::AnimatedSprite::sprite);
+		animatedSpriteType.set_function("setAnimations", [](AnimatedSprite& self, sol::table anims) {
+			for (const auto& key_value_pair : anims) {
+				std::string name = key_value_pair.first.as<std::string>();
+				sol::table animationTable = key_value_pair.second.as<sol::table>();
+				std::vector<Frame> frames;
+				for (const auto& framePair : animationTable) {
+					auto frameTable = framePair.second.as<sol::table>();
+					Frame frame;
+					frame.x = frameTable.get<sol::table>("frame").get<int>("x");
+					frame.y = frameTable.get<sol::table>("frame").get<int>("y");
+					frame.width = frameTable.get<sol::table>("frame").get<int>("width");
+					frame.height = frameTable.get<sol::table>("frame").get<int>("height");
+					frame.time = frameTable.get<float>("time");
+					frames.push_back(frame);
+				}
+				self.setAnimation(name, frames);
+			}
+		});
 	}
 }

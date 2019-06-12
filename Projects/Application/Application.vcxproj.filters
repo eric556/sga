@@ -96,6 +96,9 @@
     <ClInclude Include="src\Systems\RenderTextureSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\Systems\RenderAnimated.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\RenderAnimated.cpp">
+      <Filter>src\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

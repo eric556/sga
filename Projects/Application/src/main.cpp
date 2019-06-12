@@ -19,6 +19,7 @@
 #include "Systems/RenderSystem.h"
 #include "Systems/RenderTextureSystem.h"
 #include "Systems/PlayerInputSystem.h"
+#include "Systems/RenderAnimated.h"
 
 
 float random(float HI, float LO) {
@@ -51,6 +52,7 @@ int main()
 	Systems::PhysicsSystem physSys;
 	Systems::RenderSystem renderSys;
 	Systems::RenderTextureSystem renderTextureSys;
+	Systems::RenderAnimated renderAnimatedSys;
 
 
 	sf::Color bgColor;
@@ -80,6 +82,7 @@ int main()
 		window.clear(bgColor);
 		renderSys.run(window);
 		renderTextureSys.run(window, rManager);
+		renderAnimatedSys.run(dt.asSeconds(), window, rManager);
 
 #ifdef _DEBUG
 		ImGui::SFML::Update(window, dt);
