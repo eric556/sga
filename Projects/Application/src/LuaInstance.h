@@ -16,6 +16,7 @@ namespace Lua {
 			// create a method so it can be added to and removed from entities
 			MainState["Entity"]["add" + name] = &ECS::Entity::addComponent<T>;
 			MainState["Entity"]["remove" + name] = &ECS::Entity::removeComp<T>;
+			MainState["Entity"]["get" + name] = &ECS::Entity::getComponent<T>;
 			return type;
 		}
 

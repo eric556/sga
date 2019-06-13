@@ -1,4 +1,3 @@
-#define IMGUI_SFML
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include <SFML/Graphics.hpp>
@@ -45,6 +44,8 @@ int main()
 	rManager.LoadTexture("dungeon_sheet", "C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/dungeon_sheet.png");
 	rManager.LoadTexture("mini_char", "C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/mini char/spritesheet.png");
 
+	sol::state_view view = luaInstance.getStateView();
+
 	// Setup ECS
 	ECS::EntityManager eManager;
 	Systems::GravitySystem gravSys;
@@ -54,12 +55,36 @@ int main()
 	Systems::RenderTextureSystem renderTextureSys;
 	Systems::RenderAnimated renderAnimatedSys;
 
+	// Setup game methods
+	view.safe_script_file("C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/Scripts/display-test.lua");
+	sol::function loadFunction = view["load"];
+	sol::function updateFunction = view["update"];
+	sol::function drawFunction = view["draw"];
+
+	view.set_function("drawAnimated", [&window, &rManager, &renderAnimatedSys](float dt) {
+		renderAnimatedSys.run(dt, window, rManager);
+	});
+
+	view.set_function("drawTexture", [&window, &rManager, &renderTextureSys]() {
+		renderTextureSys.run(window, rManager);
+	});
+
+	view.set_function("drawShape", [&window, &renderSys]() {
+		renderSys.run(window);
+	});
+
+	view.set_function("getKeyDown", [&window](unsigned int key) -> bool {
+		return sf::Keyboard::isKeyPressed((sf::Keyboard::Key)key);
+	});
 
 	sf::Color bgColor;
 
 	float color[3] = { 0.f, 0.f, 0.f };
 	char consoleBuffer[255] = "";
 
+	if (loadFunction.valid()) {
+		loadFunction();
+	}
 
 	window.resetGLStates();
 	sf::Clock deltaClock;
@@ -75,14 +100,19 @@ int main()
 
 		sf::Time dt = deltaClock.restart();
 
-		playerInputSys.run(dt.asSeconds(), window);
+		// playerInputSys.run(dt.asSeconds(), window);
 		gravSys.run();
 		physSys.run(dt.asSeconds());
 
+		if (updateFunction.valid()) {
+			updateFunction(dt.asSeconds());
+		}
+
 		window.clear(bgColor);
-		renderSys.run(window);
-		renderTextureSys.run(window, rManager);
-		renderAnimatedSys.run(dt.asSeconds(), window, rManager);
+
+		if (drawFunction.valid()) {
+			drawFunction(dt.asSeconds());
+		}
 
 #ifdef _DEBUG
 		ImGui::SFML::Update(window, dt);

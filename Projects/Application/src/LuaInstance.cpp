@@ -4,6 +4,7 @@
 #include <functional>
 #include <memory>
 #include "Constants.hpp"
+#include "Helpers.hpp"
 
 
 namespace Lua {
@@ -21,8 +22,13 @@ namespace Lua {
 			sol::constructors <sf::Vector3f(float, float, float)>(),
 			"x", &sf::Vector3f::x,
 			"y", &sf::Vector3f::y,
-			"z", &sf::Vector3f::z
+			"z", &sf::Vector3f::z,
+			sol::meta_function::addition, sol::resolve<sf::Vector3f(const sf::Vector3f&, const sf::Vector3f&)>(sf::operator+),
+			sol::meta_function::subtraction, sol::resolve<sf::Vector3f(const sf::Vector3f&, const sf::Vector3f&)>(sf::operator-),
+			sol::meta_function::multiplication, sol::resolve<sf::Vector3f(const sf::Vector3f&, float)>(sf::operator*)
 		);
+
+		MainState.set_function("Normalize", &Math::normalize);
 
 
 		MainState.new_usertype<sf::Color>("Color",

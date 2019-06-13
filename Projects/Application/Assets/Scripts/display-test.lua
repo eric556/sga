@@ -98,3 +98,63 @@ function makePlayer()
 
     return entity
 end
+
+function movePlayer(dt)
+    move = Vector3.new(0, 0, 0)
+
+    if(getKeyDown(22)) then
+        move = move + Vector3.new(0, -1, 0)
+    end
+
+    if(getKeyDown(18)) then
+        move = move + Vector3.new(0, 1, 0)
+    end
+
+    if(getKeyDown(0)) then
+        move = move + Vector3.new(-1, 0, 0)
+    end
+
+    if(getKeyDown(3)) then
+        move = move + Vector3.new(1, 0, 0)
+    end
+
+    if (move.x > 0 and move.y == 0) then
+        playerSprite:setCurrentAnimation("right");
+    elseif (move.x < 0 and move.y == 0) then
+        playerSprite:setCurrentAnimation("left");
+    elseif (move.x == 0 and move.y < 0) then
+        playerSprite:setCurrentAnimation("up");
+    elseif (move.x == 0 and move.y > 0) then
+        playerSprite:setCurrentAnimation("down");
+    elseif (move.x > 0 and move.y > 0) then
+        playerSprite:setCurrentAnimation("down_right");
+    elseif (move.x > 0 and move.y < 0) then
+        playerSprite:setCurrentAnimation("up_right");
+    elseif (move.x < 0 and move.y > 0) then
+        playerSprite:setCurrentAnimation("down_left");
+    elseif (move.x < 0 and move.y < 0) then
+        playerSprite:setCurrentAnimation("up_left");
+    else
+        playerSprite:setCurrentAnimation("idle");
+    end
+
+    move = Normalize(move) * speed * dt
+    playerTransform.position = playerTransform.position + (Normalize(move) * speed * dt)
+end
+
+function load()
+    player = makePlayer()
+    playerTransform = player:getTransform()
+    playerSprite = player:getAnimatedSprite()
+    time = 0
+    speed = 500
+end
+
+function update(dt)
+    movePlayer(dt)
+end
+
+function draw(dt)
+    drawAnimated(dt)
+    drawShape()
+end
