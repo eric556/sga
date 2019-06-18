@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "Sprite.h"
 #include "AnimatedSprite.h"
+#include "TileMap.h"
 #include <sol.hpp>
 #include <iostream>
 
@@ -31,6 +32,8 @@ namespace Components {
 
 		auto textureType = instance.registerComponent<Sprite>("Sprite");
 		textureType.set("texture_id", &Components::Sprite::id);
+		textureType.set("useTextureRect", &Components::Sprite::useTextureRect);
+		textureType.set("textureRect", &Components::Sprite::textureRect);
 
 		auto animatedSpriteType = instance.registerComponent<AnimatedSprite>("AnimatedSprite");
 		animatedSpriteType.set("texture_id", &Components::AnimatedSprite::id);
@@ -55,6 +58,38 @@ namespace Components {
 				}
 				self.setAnimation(name, frames);
 			}
+		});
+
+
+		auto tilemapType = instance.registerComponent<TileMap>("Tilemap");
+		tilemapType.set("tilesetId", &TileMap::tilesetId);
+		tilemapType.set_function("setMap", [](TileMap& self, sol::table tilemap, std::vector<sol::table> tiledefs, int indexOffset) {
+			sol::table layers = tilemap["layers"];
+			int width = tilemap["width"];
+			int height = tilemap["height"];
+
+			std::map<int, std::vector<std::vector<Tile>>> tileLayers;
+
+			for (const auto& layer : layers) {
+				std::string name = layer.first.as<std::string>();
+				sol::table layerTable = layer.second;
+				int zIndex = layerTable.get<int>("zIndex");
+				std::vector<std::vector<int>> tile_indicies = layerTable.get<std::vector<std::vector<int>>>("data");
+
+				std::vector<std::vector<Tile>> tiles;
+				for (int y = 0; y < height; y++) {
+					std::vector<Tile> row;
+					for (int x = 0; x < width; x++) {
+						int index = tile_indicies[y][x]  + indexOffset;
+						sol::table tile = tiledefs[(index < 0)?0:index];
+						row.push_back({ tile.get<int>("x"), tile.get<int>("y"), tile.get<int>("width"), tile.get<int>("height") });
+					}
+					tiles.push_back(row);
+				}
+				tileLayers[zIndex] = tiles;
+			}
+
+			self.setMap(width, height, tileLayers);
 		});
 	}
 }

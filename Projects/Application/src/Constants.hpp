@@ -12,7 +12,8 @@ namespace Components{
 		FRICTION,
 		TRANSFORM,
 		SPRITE,
-		ANIMATED_SPRITE
+		ANIMATED_SPRITE,
+		TILE_MAP
 	};
 
 	static const float MIN_MASS = 0.0001f;

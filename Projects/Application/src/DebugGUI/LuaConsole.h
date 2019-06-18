@@ -5,17 +5,16 @@
 #include <sol.hpp>
 
 #include "../LuaInstance.h"
-#include "GuiElement.h"
+#include "../Engine/Game.h"
 
 namespace Debug {
-	class LuaConsole : public GuiElement{
+	class LuaConsole {
 	public:
-		LuaConsole(Lua::LuaInstance& instance);
-		void Draw();
+		LuaConsole();
+		void Draw(Game& game);
 	private:
 		char textBuffer[255];
 		char filePathBuffer[255];
 		std::vector<std::string> entries;
-		sol::state_view stateView;
 	};
 }

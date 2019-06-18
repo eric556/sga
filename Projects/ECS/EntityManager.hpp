@@ -10,7 +10,7 @@ namespace ECS {
 	public:
 		std::shared_ptr<Entity> createEntity() {
 
-			std::shared_ptr<Entity> newEntity(new Entity(++entityCount));
+			std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(++entityCount);
 
 			entities.push_back(newEntity);
 			return entities.back();

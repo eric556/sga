@@ -1,20 +1,20 @@
 #include "LuaConsole.h"
 #include "imgui.h"
 #include "imgui-SFML.h"
+#include "../Components/ComponentRegister.h"
 
 #include <memory>
 
 
 
 namespace Debug {
-	LuaConsole::LuaConsole(Lua::LuaInstance& instance) : stateView(instance.getStateView()){
+	LuaConsole::LuaConsole() {
 		textBuffer[0] = 0;
 		filePathBuffer[0] = 0;
-		visible = false;
 	}
 
-	void LuaConsole::Draw() {
-		if (!visible) return;
+	void LuaConsole::Draw(Game& game) {
+		sol::state_view stateView = game.lua.getStateView();
 		ImGui::Begin("Lua Console", 0, ImGuiWindowFlags_MenuBar);
 		bool fileMenuOpen = false;
 		if (ImGui::BeginMenuBar()) {
@@ -29,8 +29,8 @@ namespace Debug {
 					entries.clear();
 				}
 
-				if (ImGui::MenuItem("Close")) {
-					visible = false;
+				if (ImGui::MenuItem("Reset Lua State")) {
+					game.lua.resetState();
 				}
 
 				ImGui::EndMenu();
@@ -44,8 +44,8 @@ namespace Debug {
 
 			if (ImGui::BeginPopupModal("File Picker")) {
 				if (ImGui::InputText("File Path", filePathBuffer, 255, ImGuiInputTextFlags_EnterReturnsTrue)) {
-					auto result = stateView.safe_script_file(std::string(filePathBuffer), sol::script_pass_on_error, sol::load_mode::text);
-
+					auto result = game.Load(std::string(filePathBuffer));
+					
 					if (!result.valid()) {
 						sol::error err = result;
 						entries.push_back(std::string(err.what()));
@@ -53,6 +53,7 @@ namespace Debug {
 					else {
 						entries.push_back(result);
 					}
+
 					ImGui::CloseCurrentPopup();
 				}
 

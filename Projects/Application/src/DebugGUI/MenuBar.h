@@ -1,23 +1,15 @@
 #pragma once
-#include "imgui.h"
-#include "imgui-SFML.h"
-#include "../LuaInstance.h"
+#include "../Engine/Game.h"
 #include "LuaConsole.h"
 
-#include <sol.hpp>
-
-#include <vector>
-#include <memory>
-
-#include "GuiElement.h"
-
 namespace Debug {
-	class MenuBar : public GuiElement {
+	class MenuBar {
 	public:
-		MenuBar(Lua::LuaInstance& instance);
-		void Draw();
+		MenuBar();
+		void Draw(Game& game);
 	private:
 		LuaConsole console;
-		sol::state_view stateView;
+		bool isConsoleVisible = false;
+		bool isEntityManagerVisible = false;
 	};
 }

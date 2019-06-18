@@ -16,6 +16,12 @@ namespace Components {
 
 		strcpy(buffer, id.c_str());
 
+		textRectPosition[0] = textureRect.left;
+		textRectPosition[1] = textureRect.top;
+
+		textRectSize[0] = textureRect.width;
+		textRectSize[1] = textureRect.height;
+
 		if (ImGui::InputText("Texture Name", buffer, 512, ImGuiInputTextFlags_EnterReturnsTrue)) {
 			id = std::string(buffer);
 		}
@@ -23,5 +29,18 @@ namespace Components {
 		if (ImGui::DragFloat2("Origin", origin)) {
 			sprite.setOrigin(sf::Vector2f(origin[0], origin[1]));
 		}
+		ImGui::Separator();
+		ImGui::Checkbox("Use Texture Rect", &useTextureRect);
+
+		if (ImGui::DragInt2("Position", textRectPosition)) {
+			textureRect.left = textRectPosition[0];
+			textureRect.top = textRectPosition[1];
+		}
+
+		if (ImGui::DragInt2("Size", textRectSize)) {
+			textureRect.width = textRectSize[0];
+			textureRect.height = textRectSize[1];
+		}
+
 	}
 }

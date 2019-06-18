@@ -1,21 +1,19 @@
-function magnitude(vec)
-    return math.sqrt(vec.x * vec.x + vec.y * vec.y + vec.z + vec.z)
-end
+Player = {}
 
-function makePlayer()
-    entity = entityManager:createEntity()
-    transform = entity:addTransform()
+function Player.new()
+    local entity = entityManager:createEntity()
+    local transform = entity:addTransform()
     transform.position = Vector3.new(1920 / 2, 1080 / 2, 0)
-    transform.scale = Vector2.new(30, 30)
-    input = entity:addInput()
+    transform.scale = Vector2.new(10, 10)
+    local input = entity:addInput()
     input.speed = 500
-    kb = entity:addKineticBody()
-    texture = entity:addAnimatedSprite()
+    local kb = entity:addKineticBody()
+    local texture = entity:addAnimatedSprite()
     texture.texture_id = "mini_char"
     texture:setCurrentAnimation("idle")
     texture.currentAnimationFrame = 0
     texture.sprite:setOrigin(8, 8)
-    frame_defs = {}
+    local frame_defs = {}
     i = 1
     for y = 0,7 do
         for x = 0,5 do
@@ -97,64 +95,4 @@ function makePlayer()
     texture:setAnimations(animations)
 
     return entity
-end
-
-function movePlayer(dt)
-    move = Vector3.new(0, 0, 0)
-
-    if(getKeyDown(22)) then
-        move = move + Vector3.new(0, -1, 0)
-    end
-
-    if(getKeyDown(18)) then
-        move = move + Vector3.new(0, 1, 0)
-    end
-
-    if(getKeyDown(0)) then
-        move = move + Vector3.new(-1, 0, 0)
-    end
-
-    if(getKeyDown(3)) then
-        move = move + Vector3.new(1, 0, 0)
-    end
-
-    if (move.x > 0 and move.y == 0) then
-        playerSprite:setCurrentAnimation("right");
-    elseif (move.x < 0 and move.y == 0) then
-        playerSprite:setCurrentAnimation("left");
-    elseif (move.x == 0 and move.y < 0) then
-        playerSprite:setCurrentAnimation("up");
-    elseif (move.x == 0 and move.y > 0) then
-        playerSprite:setCurrentAnimation("down");
-    elseif (move.x > 0 and move.y > 0) then
-        playerSprite:setCurrentAnimation("down_right");
-    elseif (move.x > 0 and move.y < 0) then
-        playerSprite:setCurrentAnimation("up_right");
-    elseif (move.x < 0 and move.y > 0) then
-        playerSprite:setCurrentAnimation("down_left");
-    elseif (move.x < 0 and move.y < 0) then
-        playerSprite:setCurrentAnimation("up_left");
-    else
-        playerSprite:setCurrentAnimation("idle");
-    end
-
-    move = Normalize(move) * speed * dt
-    playerTransform.position = playerTransform.position + (Normalize(move) * speed * dt)
-end
-
-function load()
-    player = makePlayer()
-    playerTransform = player:getTransform()
-    playerSprite = player:getAnimatedSprite()
-    time = 0
-    speed = 500
-end
-
-function update(dt)
-    movePlayer(dt)
-end
-
-function draw(dt)
-    drawAnimated(dt)
-    drawShape()
 end

@@ -22,8 +22,8 @@
     <Filter Include="src\DebugGUI">
       <UniqueIdentifier>{C8457CB9-B4A8-0B5E-5D2E-44144970D7E0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\DebugGUI\ComponentDebug">
-      <UniqueIdentifier>{51373110-BD44-5FF6-462B-5BE1B2372BAD}</UniqueIdentifier>
+    <Filter Include="src\Engine">
+      <UniqueIdentifier>{12A1320E-FE58-745B-6760-4DB753370F4C}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Resources">
       <UniqueIdentifier>{D76C8757-432D-038E-0C68-4C0B78E7476A}</UniqueIdentifier>
@@ -51,16 +51,16 @@
     <ClInclude Include="src\Components\Sprite.h">
       <Filter>src\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\TileMap.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
     <ClInclude Include="src\Components\Transform.h">
       <Filter>src\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Constants.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\DebugGUI\ComponentDebug\EMDebug.hpp">
-      <Filter>src\DebugGUI\ComponentDebug</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DebugGUI\GuiElement.h">
+    <ClInclude Include="src\DebugGUI\GUI.hpp">
       <Filter>src\DebugGUI</Filter>
     </ClInclude>
     <ClInclude Include="src\DebugGUI\LuaConsole.h">
@@ -68,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="src\DebugGUI\MenuBar.h">
       <Filter>src\DebugGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Game.h">
+      <Filter>src\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Helpers.hpp">
       <Filter>src</Filter>
@@ -90,14 +93,20 @@
     <ClInclude Include="src\Systems\PlayerInputSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\Systems\RenderAnimated.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\Systems\RenderSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\RenderTextureSystem.h">
+    <ClInclude Include="src\Systems\RenderTilemapSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\RenderAnimated.h">
+    <ClInclude Include="src\Systems\RenderSpriteSystem.h">
       <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DebugGUI\AnimationWindow.h">
+      <Filter>src\DebugGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +143,9 @@
     <ClCompile Include="src\Components\Sprite.cpp">
       <Filter>src\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\Components\TileMap.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
     <ClCompile Include="src\Components\Transform.cpp">
       <Filter>src\Components</Filter>
     </ClCompile>
@@ -142,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="src\DebugGUI\MenuBar.cpp">
       <Filter>src\DebugGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Game.cpp">
+      <Filter>src\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\LuaInstance.cpp">
       <Filter>src</Filter>
@@ -158,17 +173,23 @@
     <ClCompile Include="src\Systems\PlayerInputSystem.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\RenderSystem.cpp">
+    <ClCompile Include="src\Systems\RenderAnimated.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\RenderTextureSystem.cpp">
+    <ClCompile Include="src\Systems\RenderSystem.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\RenderAnimated.cpp">
+    <ClCompile Include="src\Systems\RenderTilemapSystem.cpp">
       <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\RenderSpriteSystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugGUI\AnimationWindow.cpp">
+      <Filter>src\DebugGUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

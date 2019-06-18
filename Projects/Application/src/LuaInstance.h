@@ -6,8 +6,6 @@
 namespace Lua {
 	class LuaInstance {
 	public:
-		LuaInstance();
-
 		template<class T>
 		sol::usertype<T> registerComponent(std::string name) {
 			// create the new type
@@ -20,7 +18,11 @@ namespace Lua {
 			return type;
 		}
 
+		void Init();
+
 		sol::state_view getStateView();
+		void resetState();
+
 	private:
 		sol::state MainState;
 	};

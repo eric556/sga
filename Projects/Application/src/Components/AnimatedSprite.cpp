@@ -40,6 +40,7 @@ namespace Components {
 		if (!ImGui::CollapsingHeader("Frames")) {
 			return;
 		}
+
 		for (auto& kv : animationMap) {
 			std::string name = kv.first;
 			if (ImGui::TreeNode(name.c_str())) {
