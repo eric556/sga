@@ -1,10 +1,9 @@
 #pragma once
 #include "../Engine/Game.h"
 
-
 namespace Systems {
-	class RenderSystem {
+	class CameraSystem {
 	public:
-		void run(Game& window);
+		void run(Game& game);
 	};
 }

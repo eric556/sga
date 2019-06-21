@@ -13,7 +13,9 @@ namespace Components{
 		TRANSFORM,
 		SPRITE,
 		ANIMATED_SPRITE,
-		TILE_MAP
+		TILE_MAP,
+		BOUNDING_BOX,
+		CAMERA
 	};
 
 	static const float MIN_MASS = 0.0001f;

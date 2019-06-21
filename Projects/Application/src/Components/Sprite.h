@@ -9,6 +9,7 @@ namespace Components {
 		Sprite();
 
 		void debug();
+		std::string dump(std::string name);
 	public:
 		std::string id;
 		sf::Sprite sprite;

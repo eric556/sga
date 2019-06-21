@@ -9,10 +9,15 @@ namespace ECS {
 	class EntityManager {
 	public:
 		std::shared_ptr<Entity> createEntity() {
-
 			std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(++entityCount);
-
 			entities.push_back(newEntity);
+			return entities.back();
+		}
+
+		std::shared_ptr<Entity> createEntity(std::shared_ptr<Entity>& parent) {
+			std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(parent, ++entityCount);
+			entities.push_back(newEntity);
+			parent->children.push_back(newEntity);
 			return entities.back();
 		}
 
@@ -26,12 +31,25 @@ namespace ECS {
 
 		// maybe do this with binary search since all the IDs should be in order
 		bool deleteEntity(unsigned int id) {
+			std::vector<unsigned int> idToRemove;
 			for (int i = 0; i < entities.size(); i++) {
 				if (entities[i]->id == id) {
+					for (std::weak_ptr<Entity> child : entities[i]->children) {
+						if (auto spt = child.lock()) {
+							idToRemove.push_back(spt->id);
+						}
+					}
+
 					entities.erase(entities.begin() + i);
+
+					for (unsigned int id : idToRemove) {
+						deleteEntity(id);
+					}
 					return true;
 				}
 			}
+
+			
 
 			return false;
 		}

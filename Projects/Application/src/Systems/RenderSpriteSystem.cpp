@@ -4,7 +4,7 @@
 #include "../Components/Transform.h"
 
 namespace Systems {
-	void RenderSpriteSystem::run(sf::RenderWindow& window, Assets::ResourceManager& rManager) {
+	void RenderSpriteSystem::run(Game& game) {
 		ECS::EntityManager eManager;
 
 		auto displayEntities = eManager.getEntitiesByComponents<Components::Sprite, Components::Transform>();
@@ -12,18 +12,25 @@ namespace Systems {
 		for (auto entity : displayEntities) {
 			auto sprite = entity->getComponent<Components::Sprite>();
 			auto transform = entity->getComponent<Components::Transform>();
-			auto text = rManager.getAsset<sf::Texture>(sprite->id);
-			if (text != nullptr) {
-				if (sprite->useTextureRect) {
-					sprite->sprite.setTextureRect(sprite->textureRect);
-				} else {
-					sprite->sprite.setTextureRect(sf::IntRect(0, 0, text->getSize().x, text->getSize().y));
+			Components::Transform relTransform = transform->getRelativeTo(entity);
+
+			game.drawQueue.push({ (int)relTransform.position.z, [sprite, relTransform](sf::RenderWindow& window, Assets::ResourceManager& rManager) {
+				auto text = rManager.getAsset<sf::Texture>(sprite->id);
+				if (text != nullptr) {
+					if (sprite->useTextureRect) {
+						sprite->sprite.setTextureRect(sprite->textureRect);
+					} else {
+					  sprite->sprite.setTextureRect(sf::IntRect(0, 0, text->getSize().x, text->getSize().y));
+					}
+
+					sprite->sprite.setTexture(*text);
+					sprite->sprite.setPosition(std::floor(relTransform.position.x), std::floor(relTransform.position.y));
+					sprite->sprite.setScale(relTransform.scale);
+					window.draw(sprite->sprite);
 				}
-				sprite->sprite.setTexture(*text);
-				sprite->sprite.setPosition(transform->position.x, transform->position.y);
-				sprite->sprite.setScale(transform->scale);
-				window.draw(sprite->sprite);
-			}
+			}});
+
+			
 		}
 	}
 }

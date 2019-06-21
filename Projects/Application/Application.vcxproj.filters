@@ -108,6 +108,18 @@
     <ClInclude Include="src\DebugGUI\AnimationWindow.h">
       <Filter>src\DebugGUI</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\BoundingBox.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\CollisionSystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Camera.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\CameraSystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp">
@@ -190,6 +202,18 @@
     </ClCompile>
     <ClCompile Include="src\DebugGUI\AnimationWindow.cpp">
       <Filter>src\DebugGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\BoundingBox.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\CollisionSystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Camera.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\CameraSystem.cpp">
+      <Filter>src\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,8 +1,9 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "../Engine/Game.h"
 
 namespace Systems {
-	class RenderSpriteSystem {
+	class CollisionSystem {
 	public:
 		void run(Game& game);
 	};

@@ -2,9 +2,11 @@ PKPlayer = {}
 
 function PKPlayer.new()
     local entity = entityManager:createEntity()
+    local boundingBox = entity:addBoundingBox()
+    boundingBox.rect = FloatRect.new(0, 0, 64, 64)
     local transform = entity:addTransform()
-    transform.position = Vector3.new(1920 / 2, 1080 / 2, 0)
-    transform.scale = Vector2.new(1, 1)
+    transform.position = Vector3.new(1920 / 2, 1080 / 2, 4)
+    transform.scale = Vector2.new(0.5, 0.5)
     local input = entity:addInput()
     input.speed = 100
     local kb = entity:addKineticBody()

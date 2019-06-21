@@ -59,6 +59,12 @@ namespace Components {
 		}
 	}
 
+	std::string AnimatedSprite::dump(std::string name)
+	{
+		// TODO finish this
+		return "-- Animated Sprite not implemented\r\n";
+	}
+
 	void AnimatedSprite::setAnimation(std::string name, std::vector<Frame> anim)
 	{
 		// Maybe do some error checking here

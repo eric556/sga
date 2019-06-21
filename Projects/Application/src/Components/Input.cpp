@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include "../Constants.hpp"
+#include <sstream>
 
 
 namespace Components {
@@ -17,5 +18,13 @@ namespace Components {
 		if (ImGui::DragFloat("Speed", &speed)) {
 
 		}
+	}
+
+	std::string Input::dump(std::string name)
+	{
+		std::stringstream stream;
+		stream << "local inputComp" << name << " = " << name << ":addInput()" << std::endl
+		<< "inputComp" << name << ".speed = " << speed << std::endl;
+		return stream.str();
 	}
 }

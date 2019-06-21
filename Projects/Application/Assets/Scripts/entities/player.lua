@@ -2,6 +2,8 @@ Player = {}
 
 function Player.new()
     local entity = entityManager:createEntity()
+    local boundingBox = entity:addBoundingBox()
+    boundingBox = FloatRect.new(0, 0, 16 * 10, 16 * 10)
     local transform = entity:addTransform()
     transform.position = Vector3.new(1920 / 2, 1080 / 2, 0)
     transform.scale = Vector2.new(10, 10)

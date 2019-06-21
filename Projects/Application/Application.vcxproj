@@ -93,6 +93,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\AnimatedSprite.h" />
+    <ClInclude Include="src\Components\BoundingBox.h" />
+    <ClInclude Include="src\Components\Camera.h" />
     <ClInclude Include="src\Components\ComponentRegister.h" />
     <ClInclude Include="src\Components\Display.h" />
     <ClInclude Include="src\Components\Input.h" />
@@ -110,6 +112,8 @@
     <ClInclude Include="src\LuaInstance.h" />
     <ClInclude Include="src\Resources\AssetManager.hpp" />
     <ClInclude Include="src\Resources\ResourceManager.h" />
+    <ClInclude Include="src\Systems\CameraSystem.h" />
+    <ClInclude Include="src\Systems\CollisionSystem.h" />
     <ClInclude Include="src\Systems\GravitySystem.h" />
     <ClInclude Include="src\Systems\PhysicsSystem.h" />
     <ClInclude Include="src\Systems\PlayerInputSystem.h" />
@@ -125,6 +129,8 @@
     <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\..\Libraries\IMGUI\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Components\AnimatedSprite.cpp" />
+    <ClCompile Include="src\Components\BoundingBox.cpp" />
+    <ClCompile Include="src\Components\Camera.cpp" />
     <ClCompile Include="src\Components\ComponentRegister.cpp" />
     <ClCompile Include="src\Components\Display.cpp" />
     <ClCompile Include="src\Components\Input.cpp" />
@@ -138,6 +144,8 @@
     <ClCompile Include="src\Engine\Game.cpp" />
     <ClCompile Include="src\LuaInstance.cpp" />
     <ClCompile Include="src\Resources\ResourceManager.cpp" />
+    <ClCompile Include="src\Systems\CameraSystem.cpp" />
+    <ClCompile Include="src\Systems\CollisionSystem.cpp" />
     <ClCompile Include="src\Systems\GravitySystem.cpp" />
     <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="src\Systems\PlayerInputSystem.cpp" />

@@ -17,6 +17,7 @@ namespace Components {
 		TileMap();
 		void debug();
 		void setMap(int width, int height, std::map<int, std::vector<std::vector<Tile>>> tiles);
+		std::string dump(std::string name);
 	public:
 		std::string tilesetId;
 		std::map<int, sf::VertexArray> layers;

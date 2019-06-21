@@ -20,6 +20,8 @@
 #include "Systems/PlayerInputSystem.h"
 #include "Systems/RenderAnimated.h"
 #include "Systems/RenderTilemapSystem.h"
+#include "Systems/CollisionSystem.h"
+#include "Systems/CameraSystem.h"
 
 float random(float HI, float LO) {
 	return LO + static_cast <float> (std::rand()) / (static_cast <float> (RAND_MAX / (HI - LO)));
@@ -30,7 +32,7 @@ int main()
 	srand(static_cast <unsigned> (time(0)));
 
 	// Setup graphics
-	Game game("SGA", 1920, 1080);
+	Game game("SGA", 900, 900);
 	game.window.setVerticalSyncEnabled(true);
 	ImGui::SFML::Init(game.window);
 	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
@@ -54,21 +56,31 @@ int main()
 	Systems::RenderSpriteSystem renderTextureSys;
 	Systems::RenderAnimated renderAnimatedSys;
 	Systems::RenderTilemapSystem renderTilemapSys;
+	Systems::CollisionSystem colSys;
+	Systems::CameraSystem camSys;
 
 	view.set_function("drawAnimated", [&game, &renderAnimatedSys](float dt) {
-		renderAnimatedSys.run(dt, game.window, game.rManager);
+		renderAnimatedSys.run(dt, game);
 	});
 
 	view.set_function("drawSprite", [&game, &renderTextureSys]() {
-		renderTextureSys.run(game.window, game.rManager);
+		renderTextureSys.run(game);
 	});
 
 	view.set_function("drawShape", [&game, &renderSys]() {
-		renderSys.run(game.window);
+		renderSys.run(game);
 	});
 
 	view.set_function("drawTilemap", [&game, &renderTilemapSys]() {
-		renderTilemapSys.run(game.window, game.rManager);
+		renderTilemapSys.run(game);
+	});
+
+	view.set_function("checkCollisions", [&game, &colSys]() {
+		colSys.run(game);
+	});
+
+	view.set_function("updateCamera", [&game, &camSys]() {
+		camSys.run(game);
 	});
 
 	game.Start("C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/Scripts/main.lua");

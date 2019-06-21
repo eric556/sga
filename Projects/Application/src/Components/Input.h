@@ -8,6 +8,7 @@ namespace Components {
 	public:
 		Input();
 		void debug();
+		std::string dump(std::string name);
 	public:
 		float speed;
 	};

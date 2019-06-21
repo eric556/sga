@@ -2,7 +2,7 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include "../Constants.hpp"
-
+#include <sstream>
 
 namespace Components {
 	Display::Display() : shape() {
@@ -36,5 +36,15 @@ namespace Components {
 			shape.setOrigin(sf::Vector2f(origin[0], origin[1]));
 		}
 
+	}
+
+	std::string Display::dump(std::string name)
+	{
+		std::stringstream stream;
+		stream << "local displayComp" << name << " = " << name << ":addDisplay()" << std::endl
+			<< "displayComp" << name << ".shape = RectangleShape.new(Vector2f.new(" << shape.getSize().x << ", " << shape.getSize().y << "))" << std::endl
+			<< "displayComp" << name << ":setColor(Color.new(" << shape.getFillColor().r << ", " << shape.getFillColor().g << ", " << shape.getFillColor().b << ", " << shape.getFillColor().a << "))" << std::endl
+			<< "displayComp" << name << ":setOrigin(" << shape.getOrigin().x << ", " << shape.getOrigin().y << std::endl;
+		return stream.str();
 	}
 }

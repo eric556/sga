@@ -6,6 +6,8 @@
 #include "Sprite.h"
 #include "AnimatedSprite.h"
 #include "TileMap.h"
+#include "BoundingBox.h"
+#include "Camera.h"
 #include <sol.hpp>
 #include <iostream>
 
@@ -90,6 +92,18 @@ namespace Components {
 			}
 
 			self.setMap(width, height, tileLayers);
+		});
+
+		auto boundingBoxType = instance.registerComponent<BoundingBox>("BoundingBox");
+		boundingBoxType.set("rect", &BoundingBox::boundingBox);
+
+		auto cameraType = instance.registerComponent<Camera>("Camera");
+		cameraType.set_function("setSize", [](Camera& self, int width, int height) {
+			self.view.setSize(width, height);
+		});
+		// cameraType.set("followEntity", &Camera::followEntity);
+		cameraType.set_function("setFollow", [](Camera& self, std::shared_ptr<ECS::Entity>& entity) {
+			self.followEntity = entity;
 		});
 	}
 }

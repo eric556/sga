@@ -22,6 +22,11 @@ namespace ECS {
 			this->id = id;
 		}
 
+		Entity(std::shared_ptr<Entity>& parent, unsigned int id = 0) {
+			this->parent = parent;
+			this->id = id;
+		}
+
 		template<class T>
 		std::shared_ptr<T> addComponent() {
 			T comp;
@@ -128,9 +133,30 @@ namespace ECS {
 			componentFlags.set(flag, false);
 		}
 
+		void addChild(std::shared_ptr<Entity>& child) {
+			this->children.push_back(child);
+		}
+
+		bool removeChild(unsigned int id) {
+			for (int i = 0; i < children.size(); i++){
+				if (auto spt = children[i].lock()) {
+					if (spt->id == id) {
+						spt->parent = std::weak_ptr<Entity>();
+						children.erase(children.begin() + i);
+
+						return true;
+					}
+				}
+			}
+
+			return false;
+		}
+
 
 	public:
 		std::vector <std::shared_ptr<Component>> components;
 		std::bitset<MAX_COMPONENTS> componentFlags;
+		std::vector <std::weak_ptr<Entity>> children;
+		std::weak_ptr<Entity> parent;
 	};
 }

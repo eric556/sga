@@ -9,6 +9,7 @@ namespace Components {
 	public:
 		Display();
 		void debug();
+		std::string dump(std::string name);
 	public:
 		sf::RectangleShape shape;
 

@@ -10,6 +10,7 @@ namespace Components {
 		KineticBody();
 
 		void debug();
+		std::string dump(std::string name);
 
 	public:
 		sf::Vector3f velocity;

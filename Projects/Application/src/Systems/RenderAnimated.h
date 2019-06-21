@@ -1,9 +1,9 @@
 #pragma once
-#include "../Resources/ResourceManager.h"
+#include "../Engine/Game.h"
 
 namespace Systems {
 	class RenderAnimated {
 	public:
-		void run(float dt, sf::RenderWindow& window, Assets::ResourceManager& rManager);
+		void run(float dt, Game& game);
 	};
 }

@@ -30,10 +30,10 @@ void Components::TileMap::setMap(int width, int height, std::map<int, std::vecto
 			for (int x = 0; x < width; x++) {
 				Tile current = kv.second[y][x];
 				sf::Vertex* quad = &layers[kv.first][(y + x * width) * 4];
-				quad[0].position = sf::Vector2f(x * current.width, y * current.height);
-				quad[1].position = sf::Vector2f((x + 1) * current.width, (y * current.height));
-				quad[2].position = sf::Vector2f((x + 1) * current.width, (y + 1) * current.height);
-				quad[3].position = sf::Vector2f((x * current.width), (y + 1) * current.height);
+				quad[0].position = sf::Vector2f(x * current.width + 0.5f, y * current.height + 0.5f);
+				quad[1].position = sf::Vector2f((x + 1) * current.width + 0.5f, (y * current.height) + 0.5f);
+				quad[2].position = sf::Vector2f((x + 1) * current.width + 0.5f, (y + 1) * current.height + 0.5f);
+				quad[3].position = sf::Vector2f((x * current.width) + 0.5f, (y + 1) * current.height + 0.5f);
 
 				quad[0].texCoords = sf::Vector2f(current.x, current.y);
 				quad[1].texCoords = sf::Vector2f(current.x + current.width, current.y);
@@ -44,5 +44,10 @@ void Components::TileMap::setMap(int width, int height, std::map<int, std::vecto
 	}
 
 	
+}
+
+std::string Components::TileMap::dump(std::string name)
+{
+	return "-- Tile Map not implemented";
 }
 

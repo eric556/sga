@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include "../Constants.hpp"
+#include <sstream>
 
 namespace Components {
 	Sprite::Sprite() {
@@ -42,5 +43,17 @@ namespace Components {
 			textureRect.height = textRectSize[1];
 		}
 
+	}
+
+	std::string Sprite::dump(std::string name)
+	{
+		std::stringstream stream;
+
+		stream << "local spriteComp" << name << " = " << name << ":addSprite()" << std::endl
+			<< "spriteComp" << name << ".texture_id = '" << id << "'" << std::endl
+			<< "spriteComp" << name << ".useTextureRect = " << ((useTextureRect) ? "true" : "false") << std::endl
+			<< "spriteComp" << name << ".textureRect = IntRect.new(" << textureRect.left << ", " << textureRect.top << ", " << textureRect.width << ", " << textureRect.height << ")" << std::endl;
+
+		return stream.str();
 	}
 }

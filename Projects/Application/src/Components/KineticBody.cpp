@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include "../Constants.hpp"
+#include <sstream>
 
 
 namespace Components {
@@ -36,5 +37,17 @@ namespace Components {
 
 		if (ImGui::DragFloat("mass", &mass, 1.0f, MIN_MASS, 1000.0f)) {
 		}
+	}
+
+	std::string KineticBody::dump(std::string name)
+	{
+		std::stringstream stream;
+
+		stream << "local kineticBodyComp" << name << " = " << name << ":addKineticBody()" << std::endl
+			<< "kineticBodyComp" << name << ".velocity = Vector3.new(" << velocity.x << ", " << velocity.y << ", " << velocity.z << ")" << std::endl
+			<< "kineticBodyComp" << name << ".acceleration = Vector3.new(" << acceleration.x << ", " << acceleration.y << ", " << acceleration.z << ")" << std::endl
+			<< "kineticBodyComp" << name << ".forceAccumulator = Vector3.new(" << forceAccumulator.x << ", " << forceAccumulator.y << ", " << forceAccumulator.z << ")" << std::endl;
+
+		return stream.str();
 	}
 }

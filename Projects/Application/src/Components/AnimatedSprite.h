@@ -20,6 +20,7 @@ namespace Components {
 	public:
 		AnimatedSprite();
 		void debug();
+		std::string dump(std::string name);
 		void setAnimation(std::string name, std::vector<Frame> anim);
 		Frame getCurrentFrame();
 		void update(float dt);

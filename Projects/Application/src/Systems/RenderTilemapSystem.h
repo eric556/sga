@@ -1,9 +1,9 @@
 #pragma once
-#include "../Resources/ResourceManager.h"
+#include "../Engine/Game.h"
 
 namespace Systems {
 	class RenderTilemapSystem {
 	public:
-		void run(sf::RenderWindow& window, Assets::ResourceManager& rManager);
+		void run(Game& game);
 	};
 }

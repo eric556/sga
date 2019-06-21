@@ -38,6 +38,14 @@ namespace Lua {
 			"height", &sf::IntRect::height			
 			);
 
+		MainState.new_usertype<sf::FloatRect>("FloatRect",
+			sol::constructors<sf::FloatRect(float, float, float, float)>(),
+			"top", &sf::FloatRect::top,
+			"left", &sf::FloatRect::left,
+			"width", &sf::FloatRect::width,
+			"height", &sf::FloatRect::height
+			);
+
 		MainState.set_function("Normalize", &Math::normalize);
 
 		MainState.new_usertype<sf::Color>("Color",
@@ -64,10 +72,12 @@ namespace Lua {
 			"MOVEABLE", Components::ComponentType::MOVEABLE
 		);
 
+
 		MainState.new_usertype<ECS::EntityManager>("EntityManager",
 			"entities", sol::var(std::ref(ECS::EntityManager::entities)),
 			"entityCount", sol::var(std::ref(ECS::EntityManager::entityCount)),
-			"createEntity", &ECS::EntityManager::createEntity,
+			"createEntity", sol::resolve<std::shared_ptr<ECS::Entity>()>(&ECS::EntityManager::createEntity),
+			"createEntityOnParent", sol::resolve<std::shared_ptr<ECS::Entity>(std::shared_ptr<ECS::Entity>&)>(&ECS::EntityManager::createEntity),
 			"deleteEntity", &ECS::EntityManager::deleteEntity,
 			"getEntity", &ECS::EntityManager::getEntityByID
 			);
@@ -79,7 +89,14 @@ namespace Lua {
 			"id", &ECS::Entity::id,
 			"name", &ECS::Entity::name,
 			"addTag", &ECS::Entity::addComponent,
-			"removeTag", &ECS::Entity::removeComp
+			"removeTag", &ECS::Entity::removeComp,
+			"addChild", &ECS::Entity::addChild,
+			"removeChild", &ECS::Entity::removeChild,
+			"dump", [](ECS::Entity& self) {
+					for (auto& comp : self.components) {
+						std::cout << comp->dump(self.name) << std::endl;
+					}
+				}
 			);
 
 		MainState.create_named_table("Systems");
