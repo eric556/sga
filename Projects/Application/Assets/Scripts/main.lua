@@ -54,6 +54,7 @@ function load()
     playerTransform = player:getTransform()
     playerSprite = player:getAnimatedSprite()
     playerInput = player:getInput()
+    playerState = player:addState()
     time = 0
     tilemap = Tilemap.load(jblife_tilemap)
     tilemap.name = "Tilemap"

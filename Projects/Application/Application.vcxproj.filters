@@ -120,6 +120,9 @@
     <ClInclude Include="src\Systems\CameraSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\State.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\IMGUI\imgui-sfml\imgui-SFML.cpp">
@@ -214,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="src\Systems\CameraSystem.cpp">
       <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\State.cpp">
+      <Filter>src\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
