@@ -30,6 +30,7 @@ function Misc.Lightpost.new(position)
     end
 
     local bottomHalf = entityManager:createEntityOnParent(entity)
+    bottomHalf.name = "Lightpost_" .. entity.id .. "_bottom_" .. bottomHalf.id
     local bottomTransform = bottomHalf:addTransform()
     bottomTransform.position = Vector3.new(0, 16, 0)
     local bottomSprite = bottomHalf:addSprite()
@@ -38,6 +39,7 @@ function Misc.Lightpost.new(position)
     bottomSprite.textureRect = IntRect.new(240, 448, 16, 16)
 
     local topHalf = entityManager:createEntityOnParent(entity)
+    topHalf.name = "Lightpost_" .. entity.id .. "_top_" .. topHalf.id
     local topTransform = topHalf:addTransform()
     topTransform.position = Vector3.new(0, 0, 2)
     local topSprite = topHalf:addSprite()

@@ -18,11 +18,10 @@ namespace Debug {
 		ImGui::Begin("Lua Console", 0, ImGuiWindowFlags_MenuBar);
 		bool fileMenuOpen = false;
 		if (ImGui::BeginMenuBar()) {
-			if (ImGui::BeginMenu("File"))
-			{
+			if (ImGui::BeginMenu("File")) {
 				if (ImGui::MenuItem("Open Script", "CTRL-O")) {
-					// todo load file here
-					fileMenuOpen = true;
+					scriptFilePicker.isVisible = true;
+					scriptFilePicker.Open("../../");
 				}
 
 				if (ImGui::MenuItem("Clear")) {
@@ -37,30 +36,18 @@ namespace Debug {
 			}
 			ImGui::EndMenuBar();
 
-			if (fileMenuOpen) {
-				ImGui::OpenPopup("File Picker");
-				ImGui::SetNextWindowSize(sf::Vector2f(400, 200));
-			}
+			scriptFilePicker.Draw(game);
+			if (scriptFilePicker.fileSelected)
+			{
+				auto result = game.Load(scriptFilePicker.file);
 
-			if (ImGui::BeginPopupModal("File Picker")) {
-				if (ImGui::InputText("File Path", filePathBuffer, 255, ImGuiInputTextFlags_EnterReturnsTrue)) {
-					auto result = game.Load(std::string(filePathBuffer));
-					
-					if (!result.valid()) {
-						sol::error err = result;
-						entries.push_back(std::string(err.what()));
-					}
-					else {
-						entries.push_back(result);
-					}
-
-					ImGui::CloseCurrentPopup();
+				if (!result.valid()) {
+					sol::error err = result;
+					entries.push_back(std::string(err.what()));
 				}
-
-				if (ImGui::Button("Cancel")) {
-					ImGui::CloseCurrentPopup();
+				else {
+					entries.push_back(result);
 				}
-				ImGui::EndPopup();
 			}
 		}
 

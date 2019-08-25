@@ -1,10 +1,9 @@
-#pragma once
+#include "GUI.h"
 #include "../LuaInstance.h"
 #include "../Engine/Game.h"
 #include "LuaConsole.h"
 #include "imgui.h"
 #include "imgui-SFML.h"
-#include <EntityManager.hpp>
 
 namespace ImGui {
 	std::string CreateEntityHeaderString(std::shared_ptr<ECS::Entity> entity) {
@@ -49,7 +48,8 @@ namespace ImGui {
 				if (auto spt = entity->parent.lock()) {
 					std::cout << "local " << entity->name << " = entityManager:createEntityOnParent(" << spt->name << ")" << std::endl;
 					std::cout << entity->name << ".name = '" << entity->name << "'" << std::endl;
-				} else {
+				}
+				else {
 					std::cout << "local " << entity->name << " = entityManager:createEntity()" << std::endl;
 					std::cout << entity->name << ".name = '" << entity->name << "'" << std::endl;
 				}
@@ -68,7 +68,7 @@ namespace ImGui {
 
 	void EntityManagerWindow(std::string name, ECS::EntityManager& eManager) {
 		Begin(name.c_str());
-		if (ImGui::CollapsingHeader("Entities")){
+		if (ImGui::CollapsingHeader("Entities")) {
 			for (auto entity : eManager.entities) {
 				if (entity->parent.expired()) {
 					std::string header = CreateEntityHeaderString(entity);

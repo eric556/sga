@@ -1,11 +1,11 @@
 #pragma once
+
 #include "StatefulElement.h"
-#include <Entity.hpp>
 #include <memory>
+#include <Entity.hpp>
 
-
-namespace Debug{
-	class AnimationWindow : public StatefulElement {
+namespace Debug {
+	class EntityCreator : public StatefulElement {
 	public:
 		void Draw(Game & game);
 	private:

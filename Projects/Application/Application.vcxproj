@@ -104,9 +104,12 @@
     <ClInclude Include="src\Components\Transform.h" />
     <ClInclude Include="src\Constants.hpp" />
     <ClInclude Include="src\DebugGUI\AnimationWindow.h" />
-    <ClInclude Include="src\DebugGUI\GUI.hpp" />
+    <ClInclude Include="src\DebugGUI\EntityCreator.h" />
+    <ClInclude Include="src\DebugGUI\FilePicker.h" />
+    <ClInclude Include="src\DebugGUI\GUI.h" />
     <ClInclude Include="src\DebugGUI\LuaConsole.h" />
     <ClInclude Include="src\DebugGUI\MenuBar.h" />
+    <ClInclude Include="src\DebugGUI\StatefulElement.h" />
     <ClInclude Include="src\Engine\Game.h" />
     <ClInclude Include="src\Helpers.hpp" />
     <ClInclude Include="src\LuaInstance.h" />
@@ -118,8 +121,8 @@
     <ClInclude Include="src\Systems\PhysicsSystem.h" />
     <ClInclude Include="src\Systems\PlayerInputSystem.h" />
     <ClInclude Include="src\Systems\RenderAnimated.h" />
-    <ClInclude Include="src\Systems\RenderSystem.h" />
     <ClInclude Include="src\Systems\RenderSpriteSystem.h" />
+    <ClInclude Include="src\Systems\RenderSystem.h" />
     <ClInclude Include="src\Systems\RenderTilemapSystem.h" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +142,9 @@
     <ClCompile Include="src\Components\TileMap.cpp" />
     <ClCompile Include="src\Components\Transform.cpp" />
     <ClCompile Include="src\DebugGUI\AnimationWindow.cpp" />
+    <ClCompile Include="src\DebugGUI\EntityCreator.cpp" />
+    <ClCompile Include="src\DebugGUI\FilePicker.cpp" />
+    <ClCompile Include="src\DebugGUI\GUI.cpp" />
     <ClCompile Include="src\DebugGUI\LuaConsole.cpp" />
     <ClCompile Include="src\DebugGUI\MenuBar.cpp" />
     <ClCompile Include="src\Engine\Game.cpp" />
@@ -150,10 +156,10 @@
     <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="src\Systems\PlayerInputSystem.cpp" />
     <ClCompile Include="src\Systems\RenderAnimated.cpp" />
-    <ClCompile Include="src\Systems\RenderSystem.cpp" />
     <ClCompile Include="src\Systems\RenderSpriteSystem.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Systems\RenderSystem.cpp" />
     <ClCompile Include="src\Systems\RenderTilemapSystem.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

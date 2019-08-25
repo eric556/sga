@@ -1,5 +1,7 @@
 #include "MenuBar.h"
-#include "GUI.hpp"
+#include "GUI.h"
+#include "imgui.h"
+#include "imgui-SFML.h"
 
 namespace Debug {
 	MenuBar::MenuBar() {
@@ -9,7 +11,7 @@ namespace Debug {
 		if (ImGui::BeginMainMenuBar()) {
 			if (ImGui::BeginMenu("Lua")) {
 				if (ImGui::MenuItem("Console", "CTRL-L")) {
-					isConsoleVisible = !isConsoleVisible;
+					console.isVisible = !console.isVisible;
 				}
 				if (ImGui::MenuItem("Run Script")) {
 
@@ -21,6 +23,10 @@ namespace Debug {
 			if (ImGui::BeginMenu("Utilities")) {
 				if (ImGui::MenuItem("Entity Manager")) {
 					isEntityManagerVisible = !isEntityManagerVisible;
+				}
+
+				if (ImGui::MenuItem("Entity Creator")) {
+					entityCreator.isVisible = !entityCreator.isVisible;
 				}
 
 				ImGui::EndMenu();
@@ -41,9 +47,12 @@ namespace Debug {
 			ImGui::EndMainMenuBar();
 		}
 
-		if (isConsoleVisible) {
-			// TODO draw console here
+		if (console.isVisible) {
 			console.Draw(game);
+		}
+
+		if (entityCreator.isVisible) {
+			entityCreator.Draw(game);
 		}
 
 		if (isEntityManagerVisible) {

@@ -50,6 +50,9 @@ function Buildings.PkCenter.new(position)
     transformCompPK_Center.position = Vector3.new(1032, 641, 0)
     transformCompPK_Center.scale = Vector2.new(1, 1)
     transformCompPK_Center.rotation = 0
+
+    local boundingBoxPK_Center = PK_Center:addBoundingBox()
+    boundingBoxPK_Center.rect = FloatRect.new(3, 32, 74, 62)
     
     local PK_Center_Bottom = entityManager:createEntityOnParent(PK_Center)
     PK_Center_Bottom.name = 'PK_Center_' .. PK_Center.id .. '_Bottom_' .. PK_Center_Bottom.id
@@ -92,6 +95,9 @@ function Buildings.ShoppingCenter.new(position)
     spriteCompshopping_center.texture_id = 'pokemon_sheet'
     spriteCompshopping_center.useTextureRect = true
     spriteCompshopping_center.textureRect = IntRect.new(148, 528, 144, 144)
+
+    local bondingBoxCompshopping_center = shopping_center:addBoundingBox()
+    bondingBoxCompshopping_center.rect = FloatRect.new(0, 56, 134, 86)
 end
 
 function Buildings.Apartment1.new(position)
@@ -108,6 +114,9 @@ function Buildings.Apartment1.new(position)
     spriteCompapartment_1.texture_id = 'pokemon_sheet'
     spriteCompapartment_1.useTextureRect = true
     spriteCompapartment_1.textureRect = IntRect.new(352, 400, 64, 128)
+
+    local boundingBoxCompapartment_1 = apartment_1:addBoundingBox()
+
 end
 
 function Buildings.Apartment2.new(position)
@@ -119,6 +128,8 @@ function Buildings.Apartment2.new(position)
     end
     transformCompapartment_2.scale = Vector2.new(1, 1)
     transformCompapartment_2.rotation = 0
+
+    local boundingBoxCompapartment_2
 
     local apartment_2_top = entityManager:createEntityOnParent(apartment_2)
     apartment_2_top.name = 'apartment_2_' .. apartment_2.id .. '_top_' .. apartment_2_top.id
@@ -157,6 +168,8 @@ function Buildings.Apartment3.new(position)
     transformCompapartment_3.scale = Vector2.new(1, 1)
     transformCompapartment_3.rotation = 0
 
+    local boundingBoxCompapartment_3 = apartment_3:addBoundingBox()
+
     local spriteCompapartment_3 = apartment_3:addSprite()
     spriteCompapartment_3.texture_id = 'pokemon_sheet'
     spriteCompapartment_3.useTextureRect = true
@@ -174,6 +187,8 @@ function Buildings.Apartment4.new(position)
     end
     transformCompapartment_4.scale = Vector2.new(1, 1)
     transformCompapartment_4.rotation = 0
+
+    local boundingBoxCompapartment__4 = apartment_4:addBoundingBox()
 
     local apartment_4_top = entityManager:createEntityOnParent(apartment_4)
     apartment_4_top.name = "apartment_4_" .. apartment_4.id .. "_top_" .. apartment_4_top.id 
@@ -212,6 +227,9 @@ function Buildings.Apartment5.new(position)
     end
     transformCompapartment_5.scale = Vector2.new(1, 1)
     transformCompapartment_5.rotation = 0
+
+    local boundingBoxCompapartment__5 = apartment_5:addBoundingBox()
+
 
     local apartment_5_top = entityManager:createEntityOnParent(apartment_5)
     apartment_5_top.name = 'apartment_5_' .. apartment_5.id ..'_top' .. apartment_5_top.id
@@ -255,6 +273,9 @@ function Buildings.Station.new(position)
     spriteCompstation.useTextureRect = true
     spriteCompstation.textureRect = IntRect.new(0, 480, 144, 192)
 
+    local boundingBoxCompstation = station:addBoundingBox()
+
+
     return station
 end
 
@@ -268,6 +289,8 @@ function Buildings.School.new(position)
     end
     transformCompschool.scale = Vector2.new(1, 1)
     transformCompschool.rotation = 0
+
+    local boundingBoxCompschool = school:addBoundingBox()
 
     local school_top = entityManager:createEntityOnParent(school)
     school_top.name = 'school_' .. school.id .. '_top_' .. school_top.id
@@ -306,6 +329,8 @@ function Buildings.Gym.new(position)
     transformCompgym.scale = Vector2.new(1, 1)
     transformCompgym.rotation = 0
 
+    local boundingBoxCompgym = gym:addBoundingBox()
+
     local spriteCompgym = gym:addSprite()
     spriteCompgym.texture_id = 'pokemon_sheet'
     spriteCompgym.useTextureRect = true
@@ -317,6 +342,8 @@ end
 function Buildings.SplitTemplate.new(position)
     local temp = entityManager:createEntity()
     local tempTransform = temp:addTransform()
+    local tempBondingBox = temp:addBoundingBox()
+
 
     local temp_top = entityManager:createEntityOnParent(temp)
     local temp_top_transform = temp_top:addTransform()
@@ -325,6 +352,7 @@ function Buildings.SplitTemplate.new(position)
     local temp_bottom = entityManager:createEntityOnParent(temp)
     local temp_bottom_transform = temp_bottom:addTransform()
     local temp_bottom_sprite = temp_bottom:addSprite()
+
 
     return temp, temp_top, temp_bottom
 end

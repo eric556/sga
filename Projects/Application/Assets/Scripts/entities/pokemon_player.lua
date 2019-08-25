@@ -3,7 +3,7 @@ PKPlayer = {}
 function PKPlayer.new()
     local entity = entityManager:createEntity()
     local boundingBox = entity:addBoundingBox()
-    boundingBox.rect = FloatRect.new(0, 0, 64, 64)
+    boundingBox.rect = FloatRect.new(-6, 4, 10, 8)
     local transform = entity:addTransform()
     transform.position = Vector3.new(1920 / 2, 1080 / 2, 4)
     transform.scale = Vector2.new(0.5, 0.5)
