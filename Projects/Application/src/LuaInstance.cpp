@@ -12,7 +12,7 @@ namespace Lua {
 	void LuaInstance::Init() {
 		MainState.open_libraries(sol::lib::base, sol::lib::package, sol::lib::os, sol::lib::math);
 		const std::string package_path = MainState["package"]["path"];
-		MainState["package"]["path"] = package_path + ((!package_path.empty()) ? ";" : "") + "C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/Scripts/?.lua;C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/Scripts/?/?.lua";
+		MainState["package"]["path"] = package_path + ((!package_path.empty()) ? ";" : "") + "Assets/Scripts/?.lua;Assets/Scripts/?/?.lua";
 
 		MainState.new_usertype<sf::Vector2f>("Vector2",
 			sol::constructors <sf::Vector2f(float, float)>(),

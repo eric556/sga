@@ -8,6 +8,7 @@
 
 #include <string>
 #include <time.h>
+#include <filesystem>
 
 #include "Components/ComponentRegister.h"
 #include "DebugGUI/MenuBar.h"
@@ -30,6 +31,7 @@ float random(float HI, float LO) {
 int main()
 {
 	srand(static_cast <unsigned> (time(0)));
+	std::cout << std::filesystem::current_path() << std::endl;
 
 	// Setup graphics
 	Game game("SGA", 900, 900);
@@ -40,10 +42,10 @@ int main()
 	ImGui::GetIO().ConfigDockingWithShift = true;
 	
 	// Setup resources
-	game.rManager.LoadTexture("dungeon_sheet", "C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/dungeon_sheet.png");
-	game.rManager.LoadTexture("mini_char", "C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/mini char/spritesheet.png");
-	game.rManager.LoadTexture("pokemon_sheet", "C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/pokemon_sheet.png");
-	game.rManager.LoadTexture("pokemon_player_sheet", "C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/pokemon_player_sheet.png");
+	game.rManager.LoadTexture("dungeon_sheet", "Assets/dungeon_sheet.png");
+	game.rManager.LoadTexture("mini_char", "Assets/mini char/spritesheet.png");
+	game.rManager.LoadTexture("pokemon_sheet", "Assets/pokemon_sheet.png");
+	game.rManager.LoadTexture("pokemon_player_sheet", "Assets/pokemon_player_sheet.png");
 
 
 	sol::state_view view = game.lua.getStateView();
@@ -83,7 +85,7 @@ int main()
 		camSys.run(game);
 	});
 
+	// game.Start("C:/Users/enpie/Desktop/Projects/sga/Projects/Application/Assets/Scripts/main.lua");
 	game.Start("C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/Scripts/main.lua");
-	// game.Start("C:/Users/nowace/Desktop/Projects/sga/Projects/Application/Assets/Scripts/test.lua");
 	return 0;
 }

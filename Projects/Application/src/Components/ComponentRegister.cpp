@@ -8,6 +8,7 @@
 #include "TileMap.h"
 #include "BoundingBox.h"
 #include "Camera.h"
+#include "State.h"
 #include <sol.hpp>
 #include <iostream>
 
@@ -105,5 +106,7 @@ namespace Components {
 		cameraType.set_function("setFollow", [](Camera& self, std::shared_ptr<ECS::Entity>& entity) {
 			self.followEntity = entity;
 		});
+
+		auto stateType = instance.registerComponent<State>("State");
 	}
 }
